@@ -25,7 +25,6 @@ For more information about authentication, refer to the overview in the API refe
 
 ![snyk](https://user-images.githubusercontent.com/68016351/222008880-db6536c7-1652-4edb-9e9b-611666316f21.png)
 
-## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```go
 package main
@@ -33,38 +32,56 @@ package main
 import (
     "context"
     "log"
-    "github.com/speakeasy-sdks/snyk-go"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
+    "openapi"
+    "openapi/pkg/models/shared"
+    "openapi/pkg/models/operations"
 )
 
 func main() {
-    s := sdk.New(sdk.WithSecurity(
-        shared.Security{
-            VesselAPIToken: shared.SchemeVesselAPIToken{
-                APIKey: "YOUR_API_KEY_HERE",
+    opts := []sdk.SDKOption{
+        sdk.WithSecurity(
+            shared.Security{
+                APIToken: &shared.SchemeAPIToken{
+                    APIKey: "YOUR_API_KEY_HERE",
+                },
             },
+        ),
+    }
+
+    s := sdk.New(opts...)
+
+    req := operations.CreateAppRequest{
+        PathParams: operations.CreateAppPathParams{
+            OrgID: "unde",
         },
-    ))
-    
-    req := operations.DeleteConnectionRequest{
-        Security: operations.DeleteConnectionSecurity{
-            VesselAPIToken: shared.SchemeVesselAPIToken{
-                APIKey: "YOUR_API_KEY_HERE",
+        QueryParams: operations.CreateAppQueryParams{
+            Version: "deserunt",
+        },
+        Request: &shared.AppPostRequest{
+            AccessTokenTTLSeconds: 7151.9,
+            Context: "undefined",
+            Name: "id",
+            RedirectUris: []string{
+                "perspiciatis",
+                "nulla",
+                "nihil",
+                "fuga",
             },
-        },
-        Request: &operations.DeleteConnectionRequestBody{
-            AccessToken: "unde",
+            Scopes: []string{
+                "eum",
+                "iusto",
+                "ullam",
+            },
         },
     }
 
     ctx := context.Background()
-    res, err := s.DeleteConnection(ctx, req)
+    res, err := s.Apps.CreateApp(ctx, req)
     if err != nil {
         log.Fatal(err)
     }
 
-    if res.DeleteConnection200ApplicationJSONString != nil {
+    if res.AppPostResponse != nil {
         // handle response
     }
 }
