@@ -1,4 +1,12 @@
-# github.com/speakeasy-sdks/snyk-go
+# Go SDK for Synk API
+
+<div align="center">
+   <p>The Snyk API v1 has the ability to test a package for issues as they are defined by Snyk, and to provide Snyk security automation according to your own workflows, unconstrained by security processes in Snyk products. Customers and partners can perform functions including</p>
+   <a href="https://resend.com/docs/api-reference/concepts"><img src="https://img.shields.io/static/v1?label=Docs&message=API Ref&color=000000&style=for-the-badge" /></a>
+   <a href="https://github.com/speakeasy-sdks/snyk-go/actions"><img src="https://img.shields.io/github/actions/workflow/status/speakeasy-sdks/snyk-go/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
+  <a href="https://github.com/speakeasy-sdks/snyk-go/releases"><img src="https://img.shields.io/github/v/release/resendlabs/resend-go?sort=semver&style=for-the-badge" /></a>
+</div>
 
 <!-- Start SDK Installation -->
 ## SDK Installation
@@ -7,6 +15,15 @@
 go get github.com/speakeasy-sdks/snyk-go
 ```
 <!-- End SDK Installation -->
+
+## Authentication
+
+To use the Snyk API, you must first get your API token from Snyk. Go to the General Account Settings in your Snyk account. In the `KEY` field, click to show and then select and copy your API token. Refer to the screenshot that follows.
+To use the Snyk API, supply the token in an Authorization header, preceded by `Token`: `Authorization`: `Token API_KEY`
+
+For more information about authentication, refer to the overview in the API reference docs. For additional information see Revoking and regenerating Snyk API tokens.
+
+![snyk](https://user-images.githubusercontent.com/68016351/222008880-db6536c7-1652-4edb-9e9b-611666316f21.png)
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
