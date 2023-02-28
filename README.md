@@ -25,6 +25,8 @@ For more information about authentication, refer to the overview in the API refe
 
 ![snyk](https://user-images.githubusercontent.com/68016351/222008880-db6536c7-1652-4edb-9e9b-611666316f21.png)
 
+## SDK Example Usage
+
 <!-- Start SDK Example Usage -->
 ```go
 package main
