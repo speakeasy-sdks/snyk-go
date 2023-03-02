@@ -1,8 +1,8 @@
 package shared
 
 type FieldOptions struct {
-	Key  *string      `json:"key,omitempty"`
-	Name *interface{} `json:"name,omitempty"`
+	Key  *string     `json:"key,omitempty"`
+	Name interface{} `json:"name,omitempty"`
 }
 
 type FieldTypeEnum string

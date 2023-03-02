@@ -1,4 +1,4 @@
-package sdk
+package snyk
 
 import (
 	"context"
@@ -20,7 +20,7 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-type SDK struct {
+type Snyk struct {
 
 	// Non-idiomatic field names below are to namespace fields from the fields names above to avoid name conflicts
 	_defaultClient  HTTPClient
@@ -32,10 +32,10 @@ type SDK struct {
 	_genVersion     string
 }
 
-type SDKOption func(*SDK)
+type SDKOption func(*Snyk)
 
 func WithServerURL(serverURL string, params map[string]string) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Snyk) {
 		if params != nil {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
@@ -45,22 +45,22 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 }
 
 func WithClient(client HTTPClient) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Snyk) {
 		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
-	return func(sdk *SDK) {
+	return func(sdk *Snyk) {
 		sdk._security = &security
 	}
 }
 
-func New(opts ...SDKOption) *SDK {
-	sdk := &SDK{
+func New(opts ...SDKOption) *Snyk {
+	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.1.0",
-		_genVersion: "1.6.0",
+		_sdkVersion: "0.2.0",
+		_genVersion: "1.7.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -91,7 +91,7 @@ func New(opts ...SDKOption) *SDK {
 // Remove a connection for a given `accessToken`. Removing a connection disconnects the user's CRM so they'll need to re-authenticate should they want to re-connect their CRM.
 //
 // For CRMs that support it (such as Pipedrive), removing the `accessToken` will also remove the Vessel app from their CRM.
-func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequest) (*operations.DeleteConnectionResponse, error) {
+func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequest) (*operations.DeleteConnectionResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/connection"
 
@@ -143,7 +143,7 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 
 // DeleteWebhook - Remove Webhook
 // Removes a webhook for a given connection and id
-func (s *SDK) DeleteWebhook(ctx context.Context, request operations.DeleteWebhookRequest) (*operations.DeleteWebhookResponse, error) {
+func (s *Snyk) DeleteWebhook(ctx context.Context, request operations.DeleteWebhookRequest) (*operations.DeleteWebhookResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
@@ -185,7 +185,7 @@ func (s *SDK) DeleteWebhook(ctx context.Context, request operations.DeleteWebhoo
 
 // GetAccount - Get Account
 // Retrieve a single Account by Id
-func (s *SDK) GetAccount(ctx context.Context, request operations.GetAccountRequest) (*operations.GetAccountResponse, error) {
+func (s *Snyk) GetAccount(ctx context.Context, request operations.GetAccountRequest) (*operations.GetAccountResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
@@ -235,7 +235,7 @@ func (s *SDK) GetAccount(ctx context.Context, request operations.GetAccountReque
 // Get details about all accounts.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetAccountDetails(ctx context.Context, request operations.GetAccountDetailsRequest) (*operations.GetAccountDetailsResponse, error) {
+func (s *Snyk) GetAccountDetails(ctx context.Context, request operations.GetAccountDetailsRequest) (*operations.GetAccountDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account/details"
 
@@ -283,7 +283,7 @@ func (s *SDK) GetAccountDetails(ctx context.Context, request operations.GetAccou
 
 // GetConnection - Get Connection
 // Get info about a connection for a given accessToken.
-func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectionRequest) (*operations.GetConnectionResponse, error) {
+func (s *Snyk) GetConnection(ctx context.Context, request operations.GetConnectionRequest) (*operations.GetConnectionResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/connection"
 
@@ -331,7 +331,7 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 
 // GetConnections - Get All Connections
 // List all established connections for a workspace
-func (s *SDK) GetConnections(ctx context.Context) (*operations.GetConnectionsResponse, error) {
+func (s *Snyk) GetConnections(ctx context.Context) (*operations.GetConnectionsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/connections"
 
@@ -375,7 +375,7 @@ func (s *SDK) GetConnections(ctx context.Context) (*operations.GetConnectionsRes
 
 // GetContact - Get Contact
 // Retrieve a Contact by either Id or email. When both email and Id are included, Id will take priority.
-func (s *SDK) GetContact(ctx context.Context, request operations.GetContactRequest) (*operations.GetContactResponse, error) {
+func (s *Snyk) GetContact(ctx context.Context, request operations.GetContactRequest) (*operations.GetContactResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -425,7 +425,7 @@ func (s *SDK) GetContact(ctx context.Context, request operations.GetContactReque
 // Get details about all contacts.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetContactDetails(ctx context.Context, request operations.GetContactDetailsRequest) (*operations.GetContactDetailsResponse, error) {
+func (s *Snyk) GetContactDetails(ctx context.Context, request operations.GetContactDetailsRequest) (*operations.GetContactDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact/details"
 
@@ -473,7 +473,7 @@ func (s *SDK) GetContactDetails(ctx context.Context, request operations.GetConta
 
 // GetContacts - Get All Contacts
 // Retrieve all Contacts
-func (s *SDK) GetContacts(ctx context.Context, request operations.GetContactsRequest) (*operations.GetContactsResponse, error) {
+func (s *Snyk) GetContacts(ctx context.Context, request operations.GetContactsRequest) (*operations.GetContactsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contacts"
 
@@ -524,7 +524,7 @@ func (s *SDK) GetContacts(ctx context.Context, request operations.GetContactsReq
 //
 // *CRM Caveats*:
 // - Pipedrive: dealIds + contactIds not supported when querying for all accounts
-func (s *SDK) GetCrmAccounts(ctx context.Context, request operations.GetCrmAccountsRequest) (*operations.GetCrmAccountsResponse, error) {
+func (s *Snyk) GetCrmAccounts(ctx context.Context, request operations.GetCrmAccountsRequest) (*operations.GetCrmAccountsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/accounts"
 
@@ -572,7 +572,7 @@ func (s *SDK) GetCrmAccounts(ctx context.Context, request operations.GetCrmAccou
 
 // GetCrmDeals - Get All Deals
 // Retrieve all Deals
-func (s *SDK) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsRequest) (*operations.GetCrmDealsResponse, error) {
+func (s *Snyk) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsRequest) (*operations.GetCrmDealsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deals"
 
@@ -620,7 +620,7 @@ func (s *SDK) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsReq
 
 // GetCrmUsers - Get All Users
 // Retrieve all Users
-func (s *SDK) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersRequest) (*operations.GetCrmUsersResponse, error) {
+func (s *Snyk) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersRequest) (*operations.GetCrmUsersResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/users"
 
@@ -668,7 +668,7 @@ func (s *SDK) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersReq
 
 // GetDeal - Get Deal
 // Retrieve a single Deal by Id
-func (s *SDK) GetDeal(ctx context.Context, request operations.GetDealRequest) (*operations.GetDealResponse, error) {
+func (s *Snyk) GetDeal(ctx context.Context, request operations.GetDealRequest) (*operations.GetDealResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
@@ -718,7 +718,7 @@ func (s *SDK) GetDeal(ctx context.Context, request operations.GetDealRequest) (*
 // Get details about all deals or a particular deal.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetDealDetails(ctx context.Context, request operations.GetDealDetailsRequest) (*operations.GetDealDetailsResponse, error) {
+func (s *Snyk) GetDealDetails(ctx context.Context, request operations.GetDealDetailsRequest) (*operations.GetDealDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal/details"
 
@@ -766,7 +766,7 @@ func (s *SDK) GetDealDetails(ctx context.Context, request operations.GetDealDeta
 
 // GetEvent - Get Event
 // Retrieve a single Event by Id
-func (s *SDK) GetEvent(ctx context.Context, request operations.GetEventRequest) (*operations.GetEventResponse, error) {
+func (s *Snyk) GetEvent(ctx context.Context, request operations.GetEventRequest) (*operations.GetEventResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
@@ -814,7 +814,7 @@ func (s *SDK) GetEvent(ctx context.Context, request operations.GetEventRequest) 
 
 // GetEventAttendee - Get Event Attendee
 // Retrieve a single Event Attendee by Id
-func (s *SDK) GetEventAttendee(ctx context.Context, request operations.GetEventAttendeeRequest) (*operations.GetEventAttendeeResponse, error) {
+func (s *Snyk) GetEventAttendee(ctx context.Context, request operations.GetEventAttendeeRequest) (*operations.GetEventAttendeeResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/attendee"
 
@@ -864,7 +864,7 @@ func (s *SDK) GetEventAttendee(ctx context.Context, request operations.GetEventA
 // Get details about all event attendees.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetEventAttendeeDetails(ctx context.Context, request operations.GetEventAttendeeDetailsRequest) (*operations.GetEventAttendeeDetailsResponse, error) {
+func (s *Snyk) GetEventAttendeeDetails(ctx context.Context, request operations.GetEventAttendeeDetailsRequest) (*operations.GetEventAttendeeDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/attendee/details"
 
@@ -912,7 +912,7 @@ func (s *SDK) GetEventAttendeeDetails(ctx context.Context, request operations.Ge
 
 // GetEventAttendees - Get All Event Attendees
 // Retrieve all Attendees for all Events
-func (s *SDK) GetEventAttendees(ctx context.Context, request operations.GetEventAttendeesRequest) (*operations.GetEventAttendeesResponse, error) {
+func (s *Snyk) GetEventAttendees(ctx context.Context, request operations.GetEventAttendeesRequest) (*operations.GetEventAttendeesResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/attendees"
 
@@ -962,7 +962,7 @@ func (s *SDK) GetEventAttendees(ctx context.Context, request operations.GetEvent
 // Get details about all events.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetEventDetails(ctx context.Context, request operations.GetEventDetailsRequest) (*operations.GetEventDetailsResponse, error) {
+func (s *Snyk) GetEventDetails(ctx context.Context, request operations.GetEventDetailsRequest) (*operations.GetEventDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/details"
 
@@ -1010,7 +1010,7 @@ func (s *SDK) GetEventDetails(ctx context.Context, request operations.GetEventDe
 
 // GetEvents - Get All Events
 // Retrieve all Events
-func (s *SDK) GetEvents(ctx context.Context, request operations.GetEventsRequest) (*operations.GetEventsResponse, error) {
+func (s *Snyk) GetEvents(ctx context.Context, request operations.GetEventsRequest) (*operations.GetEventsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/events"
 
@@ -1058,7 +1058,7 @@ func (s *SDK) GetEvents(ctx context.Context, request operations.GetEventsRequest
 
 // GetIntegrations - Get CRM Integrations
 // Return all of the CRM integrations supported by Vessel.
-func (s *SDK) GetIntegrations(ctx context.Context) (*operations.GetIntegrationsResponse, error) {
+func (s *Snyk) GetIntegrations(ctx context.Context) (*operations.GetIntegrationsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/crm/integrations"
 
@@ -1102,7 +1102,7 @@ func (s *SDK) GetIntegrations(ctx context.Context) (*operations.GetIntegrationsR
 
 // GetLead - Get Lead
 // Retrieve a single Lead by Id
-func (s *SDK) GetLead(ctx context.Context, request operations.GetLeadRequest) (*operations.GetLeadResponse, error) {
+func (s *Snyk) GetLead(ctx context.Context, request operations.GetLeadRequest) (*operations.GetLeadResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
@@ -1152,7 +1152,7 @@ func (s *SDK) GetLead(ctx context.Context, request operations.GetLeadRequest) (*
 // Get details about all leads.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetLeadDetails(ctx context.Context, request operations.GetLeadDetailsRequest) (*operations.GetLeadDetailsResponse, error) {
+func (s *Snyk) GetLeadDetails(ctx context.Context, request operations.GetLeadDetailsRequest) (*operations.GetLeadDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead/details"
 
@@ -1203,7 +1203,7 @@ func (s *SDK) GetLeadDetails(ctx context.Context, request operations.GetLeadDeta
 //
 // *CRM Caveats*:
 // - Pipedrive: Only `jobTitle` is returned when querying for all leads
-func (s *SDK) GetLeads(ctx context.Context, request operations.GetLeadsRequest) (*operations.GetLeadsResponse, error) {
+func (s *Snyk) GetLeads(ctx context.Context, request operations.GetLeadsRequest) (*operations.GetLeadsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/leads"
 
@@ -1251,7 +1251,7 @@ func (s *SDK) GetLeads(ctx context.Context, request operations.GetLeadsRequest) 
 
 // GetNote - Get Note
 // Retrieve a single Note by Id
-func (s *SDK) GetNote(ctx context.Context, request operations.GetNoteRequest) (*operations.GetNoteResponse, error) {
+func (s *Snyk) GetNote(ctx context.Context, request operations.GetNoteRequest) (*operations.GetNoteResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
@@ -1301,7 +1301,7 @@ func (s *SDK) GetNote(ctx context.Context, request operations.GetNoteRequest) (*
 // Get details about all notes.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetNoteDetails(ctx context.Context, request operations.GetNoteDetailsRequest) (*operations.GetNoteDetailsResponse, error) {
+func (s *Snyk) GetNoteDetails(ctx context.Context, request operations.GetNoteDetailsRequest) (*operations.GetNoteDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note/details"
 
@@ -1349,7 +1349,7 @@ func (s *SDK) GetNoteDetails(ctx context.Context, request operations.GetNoteDeta
 
 // GetNotes - Get All Notes
 // Retrieve all Notes
-func (s *SDK) GetNotes(ctx context.Context, request operations.GetNotesRequest) (*operations.GetNotesResponse, error) {
+func (s *Snyk) GetNotes(ctx context.Context, request operations.GetNotesRequest) (*operations.GetNotesResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/notes"
 
@@ -1397,7 +1397,7 @@ func (s *SDK) GetNotes(ctx context.Context, request operations.GetNotesRequest) 
 
 // GetTask - Get Task
 // Retrieve a single Task by Id
-func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*operations.GetTaskResponse, error) {
+func (s *Snyk) GetTask(ctx context.Context, request operations.GetTaskRequest) (*operations.GetTaskResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 
@@ -1447,7 +1447,7 @@ func (s *SDK) GetTask(ctx context.Context, request operations.GetTaskRequest) (*
 // Get details about all tasks.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetTaskDetails(ctx context.Context, request operations.GetTaskDetailsRequest) (*operations.GetTaskDetailsResponse, error) {
+func (s *Snyk) GetTaskDetails(ctx context.Context, request operations.GetTaskDetailsRequest) (*operations.GetTaskDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task/details"
 
@@ -1495,7 +1495,7 @@ func (s *SDK) GetTaskDetails(ctx context.Context, request operations.GetTaskDeta
 
 // GetTasks - Get All Tasks
 // Retrieve all Tasks
-func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) (*operations.GetTasksResponse, error) {
+func (s *Snyk) GetTasks(ctx context.Context, request operations.GetTasksRequest) (*operations.GetTasksResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/tasks"
 
@@ -1543,7 +1543,7 @@ func (s *SDK) GetTasks(ctx context.Context, request operations.GetTasksRequest) 
 
 // GetUser - Get User
 // Retrieve a single User by Id
-func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
+func (s *Snyk) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/user"
 
@@ -1593,7 +1593,7 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 // Get details about all users.
 //
 // Details include the type, possible values, and other meta data about the fields.
-func (s *SDK) GetUserDetails(ctx context.Context, request operations.GetUserDetailsRequest) (*operations.GetUserDetailsResponse, error) {
+func (s *Snyk) GetUserDetails(ctx context.Context, request operations.GetUserDetailsRequest) (*operations.GetUserDetailsResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/user/details"
 
@@ -1641,7 +1641,7 @@ func (s *SDK) GetUserDetails(ctx context.Context, request operations.GetUserDeta
 
 // GetWebhook - Get Webhook
 // Retrieve information about a webhook for a given connection and id
-func (s *SDK) GetWebhook(ctx context.Context, request operations.GetWebhookRequest) (*operations.GetWebhookResponse, error) {
+func (s *Snyk) GetWebhook(ctx context.Context, request operations.GetWebhookRequest) (*operations.GetWebhookResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
@@ -1689,7 +1689,7 @@ func (s *SDK) GetWebhook(ctx context.Context, request operations.GetWebhookReque
 
 // PatchEventAttendee - Update Event Attendee
 // Update the status of an event attendee
-func (s *SDK) PatchEventAttendee(ctx context.Context) (*operations.PatchEventAttendeeResponse, error) {
+func (s *Snyk) PatchEventAttendee(ctx context.Context) (*operations.PatchEventAttendeeResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/attendee"
 
@@ -1733,7 +1733,7 @@ func (s *SDK) PatchEventAttendee(ctx context.Context) (*operations.PatchEventAtt
 
 // PostAccount - Create Account
 // Create a new Account
-func (s *SDK) PostAccount(ctx context.Context, request operations.PostAccountRequest) (*operations.PostAccountResponse, error) {
+func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRequest) (*operations.PostAccountResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
@@ -1784,7 +1784,7 @@ func (s *SDK) PostAccount(ctx context.Context, request operations.PostAccountReq
 
 // PostContact - Create Contact
 // Create a new contact.
-func (s *SDK) PostContact(ctx context.Context, request operations.PostContactRequest) (*operations.PostContactResponse, error) {
+func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRequest) (*operations.PostContactResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -1838,7 +1838,7 @@ func (s *SDK) PostContact(ctx context.Context, request operations.PostContactReq
 //
 // *CRM Caveats*:
 // - Salesforce: You may only associate a Task with either a Lead or a Contact *and* either a Deal or an Account.
-func (s *SDK) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRequest) (*operations.PostCrmTaskResponse, error) {
+func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRequest) (*operations.PostCrmTaskResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 
@@ -1889,7 +1889,7 @@ func (s *SDK) PostCrmTask(ctx context.Context, request operations.PostCrmTaskReq
 
 // PostDeal - Create Deal
 // Create a new Deal
-func (s *SDK) PostDeal(ctx context.Context, request operations.PostDealRequest) (*operations.PostDealResponse, error) {
+func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequest) (*operations.PostDealResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
@@ -1940,7 +1940,7 @@ func (s *SDK) PostDeal(ctx context.Context, request operations.PostDealRequest) 
 
 // PostEvent - Create Event
 // Create a new Event.
-func (s *SDK) PostEvent(ctx context.Context, request operations.PostEventRequest) (*operations.PostEventResponse, error) {
+func (s *Snyk) PostEvent(ctx context.Context, request operations.PostEventRequest) (*operations.PostEventResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
@@ -1991,7 +1991,7 @@ func (s *SDK) PostEvent(ctx context.Context, request operations.PostEventRequest
 
 // PostEventAttendee - Create Event Attendee
 // Add an Attendee to an Event
-func (s *SDK) PostEventAttendee(ctx context.Context) (*operations.PostEventAttendeeResponse, error) {
+func (s *Snyk) PostEventAttendee(ctx context.Context) (*operations.PostEventAttendeeResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event/attendee"
 
@@ -2035,7 +2035,7 @@ func (s *SDK) PostEventAttendee(ctx context.Context) (*operations.PostEventAtten
 
 // PostLead - Create Lead
 // Create a new Lead
-func (s *SDK) PostLead(ctx context.Context, request operations.PostLeadRequest) (*operations.PostLeadResponse, error) {
+func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequest) (*operations.PostLeadResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
@@ -2086,7 +2086,7 @@ func (s *SDK) PostLead(ctx context.Context, request operations.PostLeadRequest) 
 
 // PostLinkExchange - Exchange public token for access token
 // Exchanges the public token for an access token used to interact with the account. Store the access token in a secure location.
-func (s *SDK) PostLinkExchange(ctx context.Context, request operations.PostLinkExchangeRequest) (*operations.PostLinkExchangeResponse, error) {
+func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLinkExchangeRequest) (*operations.PostLinkExchangeResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/exchange"
 
@@ -2137,7 +2137,7 @@ func (s *SDK) PostLinkExchange(ctx context.Context, request operations.PostLinkE
 
 // PostLinkToken - Create link token
 // Generates a link token to be used during the auhtentication flow. This token is passed to either the Vessel Link Component or `useVesselLink` hook.
-func (s *SDK) PostLinkToken(ctx context.Context, request operations.PostLinkTokenRequest) (*operations.PostLinkTokenResponse, error) {
+func (s *Snyk) PostLinkToken(ctx context.Context, request operations.PostLinkTokenRequest) (*operations.PostLinkTokenResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/token"
 
@@ -2184,7 +2184,7 @@ func (s *SDK) PostLinkToken(ctx context.Context, request operations.PostLinkToke
 //
 // *CRM Caveats*:
 // - Salesforce: You may only associate a Note with one entity.
-func (s *SDK) PostNote(ctx context.Context, request operations.PostNoteRequest) (*operations.PostNoteResponse, error) {
+func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequest) (*operations.PostNoteResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
@@ -2235,7 +2235,7 @@ func (s *SDK) PostNote(ctx context.Context, request operations.PostNoteRequest) 
 
 // PostWebhook - Create Webhook
 // Create a new webhook for a given connection
-func (s *SDK) PostWebhook(ctx context.Context, request operations.PostWebhookRequest) (*operations.PostWebhookResponse, error) {
+func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRequest) (*operations.PostWebhookResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
@@ -2286,7 +2286,7 @@ func (s *SDK) PostWebhook(ctx context.Context, request operations.PostWebhookReq
 
 // PutAccount - Update Account
 // Update an existing Account
-func (s *SDK) PutAccount(ctx context.Context, request operations.PutAccountRequest) (*operations.PutAccountResponse, error) {
+func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequest) (*operations.PutAccountResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
@@ -2337,7 +2337,7 @@ func (s *SDK) PutAccount(ctx context.Context, request operations.PutAccountReque
 
 // PutContact - Update Contact
 // Update an existing Contact.
-func (s *SDK) PutContact(ctx context.Context, request operations.PutContactRequest) (*operations.PutContactResponse, error) {
+func (s *Snyk) PutContact(ctx context.Context, request operations.PutContactRequest) (*operations.PutContactResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -2388,7 +2388,7 @@ func (s *SDK) PutContact(ctx context.Context, request operations.PutContactReque
 
 // PutDeal - Update Deal
 // Update an existing Deal
-func (s *SDK) PutDeal(ctx context.Context, request operations.PutDealRequest) (*operations.PutDealResponse, error) {
+func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequest) (*operations.PutDealResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
@@ -2439,7 +2439,7 @@ func (s *SDK) PutDeal(ctx context.Context, request operations.PutDealRequest) (*
 
 // PutEvent - Update Event
 // Update an existing Event by Id
-func (s *SDK) PutEvent(ctx context.Context, request operations.PutEventRequest) (*operations.PutEventResponse, error) {
+func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequest) (*operations.PutEventResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
@@ -2490,7 +2490,7 @@ func (s *SDK) PutEvent(ctx context.Context, request operations.PutEventRequest) 
 
 // PutLead - Update Lead
 // Update an existing Lead by Id
-func (s *SDK) PutLead(ctx context.Context, request operations.PutLeadRequest) (*operations.PutLeadResponse, error) {
+func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequest) (*operations.PutLeadResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
@@ -2541,7 +2541,7 @@ func (s *SDK) PutLead(ctx context.Context, request operations.PutLeadRequest) (*
 
 // PutNote - Update Note
 // Update an existing Note by Id
-func (s *SDK) PutNote(ctx context.Context, request operations.PutNoteRequest) (*operations.PutNoteResponse, error) {
+func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequest) (*operations.PutNoteResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
@@ -2592,7 +2592,7 @@ func (s *SDK) PutNote(ctx context.Context, request operations.PutNoteRequest) (*
 
 // PutTask - Update Task
 // Update an existing Task by Id
-func (s *SDK) PutTask(ctx context.Context, request operations.PutTaskRequest) (*operations.PutTaskResponse, error) {
+func (s *Snyk) PutTask(ctx context.Context, request operations.PutTaskRequest) (*operations.PutTaskResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 

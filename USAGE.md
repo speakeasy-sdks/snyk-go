@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-    s := sdk.New(sdk.WithSecurity(
+    s := snyk.New(snyk.WithSecurity(
         shared.Security{
             VesselAPIToken: shared.SchemeVesselAPIToken{
                 APIKey: "YOUR_API_KEY_HERE",

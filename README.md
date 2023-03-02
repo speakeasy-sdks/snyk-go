@@ -34,56 +34,38 @@ package main
 import (
     "context"
     "log"
-    "openapi"
-    "openapi/pkg/models/shared"
-    "openapi/pkg/models/operations"
+    "github.com/speakeasy-sdks/snyk-go"
+    "github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+    "github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
 )
 
 func main() {
-    opts := []sdk.SDKOption{
-        sdk.WithSecurity(
-            shared.Security{
-                APIToken: &shared.SchemeAPIToken{
-                    APIKey: "YOUR_API_KEY_HERE",
-                },
+    s := snyk.New(snyk.WithSecurity(
+        shared.Security{
+            VesselAPIToken: shared.SchemeVesselAPIToken{
+                APIKey: "YOUR_API_KEY_HERE",
             },
-        ),
-    }
-
-    s := sdk.New(opts...)
-
-    req := operations.CreateAppRequest{
-        PathParams: operations.CreateAppPathParams{
-            OrgID: "unde",
         },
-        QueryParams: operations.CreateAppQueryParams{
-            Version: "deserunt",
+    ))
+    
+    req := operations.DeleteConnectionRequest{
+        Security: operations.DeleteConnectionSecurity{
+            VesselAPIToken: shared.SchemeVesselAPIToken{
+                APIKey: "YOUR_API_KEY_HERE",
+            },
         },
-        Request: &shared.AppPostRequest{
-            AccessTokenTTLSeconds: 7151.9,
-            Context: "undefined",
-            Name: "id",
-            RedirectUris: []string{
-                "perspiciatis",
-                "nulla",
-                "nihil",
-                "fuga",
-            },
-            Scopes: []string{
-                "eum",
-                "iusto",
-                "ullam",
-            },
+        Request: &operations.DeleteConnectionRequestBody{
+            AccessToken: "unde",
         },
     }
 
     ctx := context.Background()
-    res, err := s.Apps.CreateApp(ctx, req)
+    res, err := s.DeleteConnection(ctx, req)
     if err != nil {
         log.Fatal(err)
     }
 
-    if res.AppPostResponse != nil {
+    if res.DeleteConnection200ApplicationJSONString != nil {
         // handle response
     }
 }
@@ -93,7 +75,7 @@ func main() {
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
 
-### SDK SDK
+### Snyk SDK
 
 * `DeleteConnection` - Delete connection
 * `DeleteWebhook` - Remove Webhook
