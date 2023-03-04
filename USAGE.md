@@ -11,13 +11,7 @@ import (
 )
 
 func main() {
-    s := snyk.New(snyk.WithSecurity(
-        shared.Security{
-            VesselAPIToken: shared.SchemeVesselAPIToken{
-                APIKey: "YOUR_API_KEY_HERE",
-            },
-        },
-    ))
+    s := snyk.New()
     
     req := operations.DeleteConnectionRequest{
         Security: operations.DeleteConnectionSecurity{

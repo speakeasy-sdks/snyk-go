@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type PostWebhookRequestBody struct {
@@ -20,5 +21,6 @@ type PostWebhook200ApplicationJSON struct {
 type PostWebhookResponse struct {
 	ContentType                         string
 	StatusCode                          int
+	RawResponse                         *http.Response
 	PostWebhook200ApplicationJSONObject *PostWebhook200ApplicationJSON
 }

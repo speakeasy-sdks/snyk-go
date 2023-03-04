@@ -20,6 +20,17 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// String provides a helper function to return a pointer to a string
+func String(s string) *string { return &s }
+
+// SDK Documentation: Vessel's CRM APIs requires an access token to be used together with your Vessel API token. Ensure the following headers are provided when making API calls:
+//
+// Key | Value | Description
+// ---------|----------|----------
+//
+//	vessel-api-token | `<VESSEL_API_TOKEN>` | The API token provided by us
+//
+// Additionally, in the query or body parameters of each request depending on whether it is a GET or POST, make sure to include the `accessToken` for the connection you want to access.
 type Snyk struct {
 
 	// Non-idiomatic field names below are to namespace fields from the fields names above to avoid name conflicts
@@ -34,7 +45,13 @@ type Snyk struct {
 
 type SDKOption func(*Snyk)
 
-func WithServerURL(serverURL string, params map[string]string) SDKOption {
+func WithServerURL(serverURL string) SDKOption {
+	return func(sdk *Snyk) {
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOption {
 	return func(sdk *Snyk) {
 		if params != nil {
 			serverURL = utils.ReplaceParameters(serverURL, params)
@@ -59,8 +76,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Snyk {
 	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.2.0",
-		_genVersion: "1.7.1",
+		_sdkVersion: "0.3.0",
+		_genVersion: "1.8.2",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -123,6 +140,7 @@ func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteCo
 	res := &operations.DeleteConnectionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -175,6 +193,7 @@ func (s *Snyk) DeleteWebhook(ctx context.Context, request operations.DeleteWebho
 	res := &operations.DeleteWebhookResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -214,6 +233,7 @@ func (s *Snyk) GetAccount(ctx context.Context, request operations.GetAccountRequ
 	res := &operations.GetAccountResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -264,6 +284,7 @@ func (s *Snyk) GetAccountDetails(ctx context.Context, request operations.GetAcco
 	res := &operations.GetAccountDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -312,6 +333,7 @@ func (s *Snyk) GetConnection(ctx context.Context, request operations.GetConnecti
 	res := &operations.GetConnectionResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -356,6 +378,7 @@ func (s *Snyk) GetConnections(ctx context.Context) (*operations.GetConnectionsRe
 	res := &operations.GetConnectionsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -404,6 +427,7 @@ func (s *Snyk) GetContact(ctx context.Context, request operations.GetContactRequ
 	res := &operations.GetContactResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -454,6 +478,7 @@ func (s *Snyk) GetContactDetails(ctx context.Context, request operations.GetCont
 	res := &operations.GetContactDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -502,6 +527,7 @@ func (s *Snyk) GetContacts(ctx context.Context, request operations.GetContactsRe
 	res := &operations.GetContactsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -553,6 +579,7 @@ func (s *Snyk) GetCrmAccounts(ctx context.Context, request operations.GetCrmAcco
 	res := &operations.GetCrmAccountsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -601,6 +628,7 @@ func (s *Snyk) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsRe
 	res := &operations.GetCrmDealsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -649,6 +677,7 @@ func (s *Snyk) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersRe
 	res := &operations.GetCrmUsersResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -697,6 +726,7 @@ func (s *Snyk) GetDeal(ctx context.Context, request operations.GetDealRequest) (
 	res := &operations.GetDealResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -747,6 +777,7 @@ func (s *Snyk) GetDealDetails(ctx context.Context, request operations.GetDealDet
 	res := &operations.GetDealDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -795,6 +826,7 @@ func (s *Snyk) GetEvent(ctx context.Context, request operations.GetEventRequest)
 	res := &operations.GetEventResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -843,6 +875,7 @@ func (s *Snyk) GetEventAttendee(ctx context.Context, request operations.GetEvent
 	res := &operations.GetEventAttendeeResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -893,6 +926,7 @@ func (s *Snyk) GetEventAttendeeDetails(ctx context.Context, request operations.G
 	res := &operations.GetEventAttendeeDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -941,6 +975,7 @@ func (s *Snyk) GetEventAttendees(ctx context.Context, request operations.GetEven
 	res := &operations.GetEventAttendeesResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -991,6 +1026,7 @@ func (s *Snyk) GetEventDetails(ctx context.Context, request operations.GetEventD
 	res := &operations.GetEventDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1039,6 +1075,7 @@ func (s *Snyk) GetEvents(ctx context.Context, request operations.GetEventsReques
 	res := &operations.GetEventsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1083,6 +1120,7 @@ func (s *Snyk) GetIntegrations(ctx context.Context) (*operations.GetIntegrations
 	res := &operations.GetIntegrationsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1131,6 +1169,7 @@ func (s *Snyk) GetLead(ctx context.Context, request operations.GetLeadRequest) (
 	res := &operations.GetLeadResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1181,6 +1220,7 @@ func (s *Snyk) GetLeadDetails(ctx context.Context, request operations.GetLeadDet
 	res := &operations.GetLeadDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1232,6 +1272,7 @@ func (s *Snyk) GetLeads(ctx context.Context, request operations.GetLeadsRequest)
 	res := &operations.GetLeadsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1280,6 +1321,7 @@ func (s *Snyk) GetNote(ctx context.Context, request operations.GetNoteRequest) (
 	res := &operations.GetNoteResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1330,6 +1372,7 @@ func (s *Snyk) GetNoteDetails(ctx context.Context, request operations.GetNoteDet
 	res := &operations.GetNoteDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1378,6 +1421,7 @@ func (s *Snyk) GetNotes(ctx context.Context, request operations.GetNotesRequest)
 	res := &operations.GetNotesResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1426,6 +1470,7 @@ func (s *Snyk) GetTask(ctx context.Context, request operations.GetTaskRequest) (
 	res := &operations.GetTaskResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1476,6 +1521,7 @@ func (s *Snyk) GetTaskDetails(ctx context.Context, request operations.GetTaskDet
 	res := &operations.GetTaskDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1524,6 +1570,7 @@ func (s *Snyk) GetTasks(ctx context.Context, request operations.GetTasksRequest)
 	res := &operations.GetTasksResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1572,6 +1619,7 @@ func (s *Snyk) GetUser(ctx context.Context, request operations.GetUserRequest) (
 	res := &operations.GetUserResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1622,6 +1670,7 @@ func (s *Snyk) GetUserDetails(ctx context.Context, request operations.GetUserDet
 	res := &operations.GetUserDetailsResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1670,6 +1719,7 @@ func (s *Snyk) GetWebhook(ctx context.Context, request operations.GetWebhookRequ
 	res := &operations.GetWebhookResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1714,6 +1764,7 @@ func (s *Snyk) PatchEventAttendee(ctx context.Context) (*operations.PatchEventAt
 	res := &operations.PatchEventAttendeeResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1765,6 +1816,7 @@ func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRe
 	res := &operations.PostAccountResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1816,6 +1868,7 @@ func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRe
 	res := &operations.PostContactResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1870,6 +1923,7 @@ func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRe
 	res := &operations.PostCrmTaskResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1921,6 +1975,7 @@ func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequest)
 	res := &operations.PostDealResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -1972,6 +2027,7 @@ func (s *Snyk) PostEvent(ctx context.Context, request operations.PostEventReques
 	res := &operations.PostEventResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2016,6 +2072,7 @@ func (s *Snyk) PostEventAttendee(ctx context.Context) (*operations.PostEventAtte
 	res := &operations.PostEventAttendeeResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2067,6 +2124,7 @@ func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequest)
 	res := &operations.PostLeadResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2118,6 +2176,7 @@ func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLink
 	res := &operations.PostLinkExchangeResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2162,6 +2221,7 @@ func (s *Snyk) PostLinkToken(ctx context.Context, request operations.PostLinkTok
 	res := &operations.PostLinkTokenResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2216,6 +2276,7 @@ func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequest)
 	res := &operations.PostNoteResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2267,6 +2328,7 @@ func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRe
 	res := &operations.PostWebhookResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2318,6 +2380,7 @@ func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequ
 	res := &operations.PutAccountResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2369,6 +2432,7 @@ func (s *Snyk) PutContact(ctx context.Context, request operations.PutContactRequ
 	res := &operations.PutContactResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2420,6 +2484,7 @@ func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequest) (
 	res := &operations.PutDealResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2471,6 +2536,7 @@ func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequest)
 	res := &operations.PutEventResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2522,6 +2588,7 @@ func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequest) (
 	res := &operations.PutLeadResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2573,6 +2640,7 @@ func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequest) (
 	res := &operations.PutNoteResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:
@@ -2624,6 +2692,7 @@ func (s *Snyk) PutTask(ctx context.Context, request operations.PutTaskRequest) (
 	res := &operations.PutTaskResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
+		RawResponse: httpRes,
 	}
 	switch {
 	case httpRes.StatusCode == 200:

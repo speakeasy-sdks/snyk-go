@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type PostLeadRequestBody struct {
@@ -20,5 +21,6 @@ type PostLead200ApplicationJSON struct {
 type PostLeadResponse struct {
 	ContentType                      string
 	StatusCode                       int
+	RawResponse                      *http.Response
 	PostLead200ApplicationJSONObject *PostLead200ApplicationJSON
 }

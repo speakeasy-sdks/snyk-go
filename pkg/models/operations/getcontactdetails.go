@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GetContactDetailsQueryParams struct {
@@ -22,5 +23,6 @@ type GetContactDetails200ApplicationJSON struct {
 type GetContactDetailsResponse struct {
 	ContentType                               string
 	StatusCode                                int
+	RawResponse                               *http.Response
 	GetContactDetails200ApplicationJSONObject *GetContactDetails200ApplicationJSON
 }

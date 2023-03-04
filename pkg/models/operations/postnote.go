@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type PostNoteRequestBody struct {
@@ -20,5 +21,6 @@ type PostNote200ApplicationJSON struct {
 type PostNoteResponse struct {
 	ContentType                      string
 	StatusCode                       int
+	RawResponse                      *http.Response
 	PostNote200ApplicationJSONObject *PostNote200ApplicationJSON
 }

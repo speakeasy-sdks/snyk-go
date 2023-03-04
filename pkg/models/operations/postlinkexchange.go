@@ -2,14 +2,15 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
-
-type PostLinkExchangeRequestBody struct {
-	PublicToken string `json:"publicToken"`
-}
 
 type PostLinkExchangeSecurity struct {
 	VesselAPIToken shared.SchemeVesselAPIToken `security:"scheme,type=apiKey,subtype=header"`
+}
+
+type PostLinkExchangeRequestBody struct {
+	PublicToken string `json:"publicToken"`
 }
 
 type PostLinkExchangeRequest struct {
@@ -36,5 +37,6 @@ type PostLinkExchange200ApplicationJSON struct {
 type PostLinkExchangeResponse struct {
 	ContentType                              string
 	StatusCode                               int
+	RawResponse                              *http.Response
 	PostLinkExchange200ApplicationJSONObject *PostLinkExchange200ApplicationJSON
 }

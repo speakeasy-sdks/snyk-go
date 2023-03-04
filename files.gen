@@ -11,7 +11,6 @@ pkg/utils/requestbody.go
 pkg/utils/retries.go
 pkg/utils/security.go
 pkg/utils/utils.go
-strings.go
 pkg/models/operations/deleteconnection.go
 pkg/models/operations/deletewebhook.go
 pkg/models/operations/getaccount.go
@@ -64,6 +63,7 @@ pkg/models/operations/putevent.go
 pkg/models/operations/putlead.go
 pkg/models/operations/putnote.go
 pkg/models/operations/puttask.go
+pkg/models/shared/security.go
 pkg/models/shared/account.go
 pkg/models/shared/address.go
 pkg/models/shared/field.go
@@ -95,5 +95,4 @@ pkg/models/shared/eventupdate.go
 pkg/models/shared/leadupdate.go
 pkg/models/shared/noteupdate.go
 pkg/models/shared/taskupdate.go
-pkg/models/shared/security.go
 USAGE.md

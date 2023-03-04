@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type PostLinkTokenSecurity struct {
@@ -19,5 +20,6 @@ type PostLinkToken200ApplicationJSON struct {
 type PostLinkTokenResponse struct {
 	ContentType                           string
 	StatusCode                            int
+	RawResponse                           *http.Response
 	PostLinkToken200ApplicationJSONObject *PostLinkToken200ApplicationJSON
 }

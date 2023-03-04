@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type PostCrmTaskRequestBody struct {
@@ -20,5 +21,6 @@ type PostCrmTask200ApplicationJSON struct {
 type PostCrmTaskResponse struct {
 	ContentType                         string
 	StatusCode                          int
+	RawResponse                         *http.Response
 	PostCrmTask200ApplicationJSONObject *PostCrmTask200ApplicationJSON
 }

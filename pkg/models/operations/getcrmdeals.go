@@ -2,6 +2,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
+	"net/http"
 )
 
 type GetCrmDealsQueryParams struct {
@@ -22,5 +23,6 @@ type GetCrmDeals200ApplicationJSON struct {
 type GetCrmDealsResponse struct {
 	ContentType                         string
 	StatusCode                          int
+	RawResponse                         *http.Response
 	GetCrmDeals200ApplicationJSONObject *GetCrmDeals200ApplicationJSON
 }
