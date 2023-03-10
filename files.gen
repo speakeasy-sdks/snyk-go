@@ -57,7 +57,8 @@ pkg/models/operations/postlinktoken.go
 pkg/models/operations/postnote.go
 pkg/models/operations/postwebhook.go
 pkg/models/operations/putaccount.go
-pkg/models/operations/putcontact.go
+pkg/models/operations/putcontactjson.go
+pkg/models/operations/putcontactraw.go
 pkg/models/operations/putdeal.go
 pkg/models/operations/putevent.go
 pkg/models/operations/putlead.go

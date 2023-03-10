@@ -76,8 +76,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Snyk {
 	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.3.4",
-		_genVersion: "1.8.7",
+		_sdkVersion: "0.4.0",
+		_genVersion: "1.9.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -2398,9 +2398,9 @@ func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequ
 	return res, nil
 }
 
-// PutContact - Update Contact
+// PutContactJSON - Update Contact
 // Update an existing Contact.
-func (s *Snyk) PutContact(ctx context.Context, request operations.PutContactRequest) (*operations.PutContactResponse, error) {
+func (s *Snyk) PutContactJSON(ctx context.Context, request operations.PutContactJSONRequest) (*operations.PutContactJSONResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -2429,7 +2429,7 @@ func (s *Snyk) PutContact(ctx context.Context, request operations.PutContactRequ
 
 	contentType := httpRes.Header.Get("Content-Type")
 
-	res := &operations.PutContactResponse{
+	res := &operations.PutContactJSONResponse{
 		StatusCode:  httpRes.StatusCode,
 		ContentType: contentType,
 		RawResponse: httpRes,
@@ -2438,12 +2438,64 @@ func (s *Snyk) PutContact(ctx context.Context, request operations.PutContactRequ
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PutContact200ApplicationJSON
+			var out *operations.PutContactJSON200ApplicationJSON
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.PutContact200ApplicationJSONObject = out
+			res.PutContactJSON200ApplicationJSONObject = out
+		}
+	}
+
+	return res, nil
+}
+
+// PutContactRaw - Update Contact
+// Update an existing Contact.
+func (s *Snyk) PutContactRaw(ctx context.Context, request operations.PutContactRawRequest) (*operations.PutContactRawResponse, error) {
+	baseURL := s._serverURL
+	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PATCH", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	req.Header.Set("Content-Type", reqContentType)
+
+	client := s._securityClient
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	if httpRes == nil {
+		return nil, fmt.Errorf("error sending request: no response")
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.PutContactRawResponse{
+		StatusCode:  httpRes.StatusCode,
+		ContentType: contentType,
+		RawResponse: httpRes,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *operations.PutContactRaw200ApplicationJSON
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.PutContactRaw200ApplicationJSONObject = out
 		}
 	}
 

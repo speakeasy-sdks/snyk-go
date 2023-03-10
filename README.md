@@ -117,7 +117,8 @@ func main() {
 * `PostNote` - Create Note
 * `PostWebhook` - Create Webhook
 * `PutAccount` - Update Account
-* `PutContact` - Update Contact
+* `PutContactJSON` - Update Contact
+* `PutContactRaw` - Update Contact
 * `PutDeal` - Update Deal
 * `PutEvent` - Update Event
 * `PutLead` - Update Lead
