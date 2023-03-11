@@ -63,3 +63,11 @@ Based on:
 - Speakeasy CLI 1.9.1 https://github.com/speakeasy-api/speakeasy
 ### Releases
 - [Go v0.4.0] https://github.com/speakeasy-sdks/snyk-go/releases/tag/v0.4.0 - .
+
+## 2023-03-11 01:04:29
+### Changes
+Based on:
+- OpenAPI Doc 1.0 https://prod.speakeasyapi.dev/v1/apis/Snyk/version/1.0.0/schema/download
+- Speakeasy CLI 1.9.2 https://github.com/speakeasy-api/speakeasy
+### Releases
+- [Go v0.4.1] https://github.com/speakeasy-sdks/snyk-go/releases/tag/v0.4.1 - .
