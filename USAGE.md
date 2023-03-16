@@ -12,7 +12,7 @@ import (
 
 func main() {
     s := snyk.New()
-    
+
     req := operations.DeleteConnectionRequest{
         Security: operations.DeleteConnectionSecurity{
             VesselAPIToken: shared.SchemeVesselAPIToken{

@@ -76,8 +76,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Snyk {
 	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.4.1",
-		_genVersion: "1.9.2",
+		_sdkVersion: "0.5.0",
+		_genVersion: "1.12.0",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -88,13 +88,11 @@ func New(opts ...SDKOption) *Snyk {
 		sdk._defaultClient = &http.Client{Timeout: 60 * time.Second}
 	}
 	if sdk._securityClient == nil {
-
 		if sdk._security != nil {
 			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
 		} else {
 			sdk._securityClient = sdk._defaultClient
 		}
-
 	}
 
 	if sdk._serverURL == "" {
@@ -112,7 +110,7 @@ func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteCo
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/connection"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -165,7 +163,7 @@ func (s *Snyk) DeleteWebhook(ctx context.Context, request operations.DeleteWebho
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -213,7 +211,7 @@ func (s *Snyk) GetAccount(ctx context.Context, request operations.GetAccountRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -264,7 +262,7 @@ func (s *Snyk) GetAccountDetails(ctx context.Context, request operations.GetAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -313,7 +311,7 @@ func (s *Snyk) GetConnection(ctx context.Context, request operations.GetConnecti
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -407,7 +405,7 @@ func (s *Snyk) GetContact(ctx context.Context, request operations.GetContactRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -458,7 +456,7 @@ func (s *Snyk) GetContactDetails(ctx context.Context, request operations.GetCont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -507,7 +505,7 @@ func (s *Snyk) GetContacts(ctx context.Context, request operations.GetContactsRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -559,7 +557,7 @@ func (s *Snyk) GetCrmAccounts(ctx context.Context, request operations.GetCrmAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -608,7 +606,7 @@ func (s *Snyk) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -657,7 +655,7 @@ func (s *Snyk) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -706,7 +704,7 @@ func (s *Snyk) GetDeal(ctx context.Context, request operations.GetDealRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -757,7 +755,7 @@ func (s *Snyk) GetDealDetails(ctx context.Context, request operations.GetDealDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -806,7 +804,7 @@ func (s *Snyk) GetEvent(ctx context.Context, request operations.GetEventRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -855,7 +853,7 @@ func (s *Snyk) GetEventAttendee(ctx context.Context, request operations.GetEvent
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -906,7 +904,7 @@ func (s *Snyk) GetEventAttendeeDetails(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -955,7 +953,7 @@ func (s *Snyk) GetEventAttendees(ctx context.Context, request operations.GetEven
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1006,7 +1004,7 @@ func (s *Snyk) GetEventDetails(ctx context.Context, request operations.GetEventD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1055,7 +1053,7 @@ func (s *Snyk) GetEvents(ctx context.Context, request operations.GetEventsReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1149,7 +1147,7 @@ func (s *Snyk) GetLead(ctx context.Context, request operations.GetLeadRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1200,7 +1198,7 @@ func (s *Snyk) GetLeadDetails(ctx context.Context, request operations.GetLeadDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1252,7 +1250,7 @@ func (s *Snyk) GetLeads(ctx context.Context, request operations.GetLeadsRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1301,7 +1299,7 @@ func (s *Snyk) GetNote(ctx context.Context, request operations.GetNoteRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1352,7 +1350,7 @@ func (s *Snyk) GetNoteDetails(ctx context.Context, request operations.GetNoteDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1401,7 +1399,7 @@ func (s *Snyk) GetNotes(ctx context.Context, request operations.GetNotesRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1450,7 +1448,7 @@ func (s *Snyk) GetTask(ctx context.Context, request operations.GetTaskRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1501,7 +1499,7 @@ func (s *Snyk) GetTaskDetails(ctx context.Context, request operations.GetTaskDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1550,7 +1548,7 @@ func (s *Snyk) GetTasks(ctx context.Context, request operations.GetTasksRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1599,7 +1597,7 @@ func (s *Snyk) GetUser(ctx context.Context, request operations.GetUserRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1650,7 +1648,7 @@ func (s *Snyk) GetUserDetails(ctx context.Context, request operations.GetUserDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1699,7 +1697,7 @@ func (s *Snyk) GetWebhook(ctx context.Context, request operations.GetWebhookRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1788,7 +1786,7 @@ func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRe
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -1840,7 +1838,7 @@ func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRe
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -1895,7 +1893,7 @@ func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRe
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -1947,7 +1945,7 @@ func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequest)
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -1999,7 +1997,7 @@ func (s *Snyk) PostEvent(ctx context.Context, request operations.PostEventReques
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2096,7 +2094,7 @@ func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequest)
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2148,7 +2146,7 @@ func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLink
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/exchange"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2248,7 +2246,7 @@ func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequest)
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2300,7 +2298,7 @@ func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRe
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2352,7 +2350,7 @@ func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequ
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2404,7 +2402,7 @@ func (s *Snyk) PutContactJSON(ctx context.Context, request operations.PutContact
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2456,7 +2454,7 @@ func (s *Snyk) PutContactRaw(ctx context.Context, request operations.PutContactR
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "raw")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2508,7 +2506,7 @@ func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequest) (
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2560,7 +2558,7 @@ func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequest)
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2612,7 +2610,7 @@ func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequest) (
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2664,7 +2662,7 @@ func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequest) (
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
@@ -2716,7 +2714,7 @@ func (s *Snyk) PutTask(ctx context.Context, request operations.PutTaskRequest) (
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, "Request", "json")
 	if err != nil {
 		return nil, fmt.Errorf("error serializing request body: %w", err)
 	}
