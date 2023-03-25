@@ -2,6 +2,11 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type ConnectionIntegrationIDEnum string
 
 const (
@@ -10,6 +15,24 @@ const (
 	ConnectionIntegrationIDEnumPipedrive  ConnectionIntegrationIDEnum = "pipedrive"
 )
 
+func (e *ConnectionIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "salesforce":
+		fallthrough
+	case "hubspot":
+		fallthrough
+	case "pipedrive":
+		*e = ConnectionIntegrationIDEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ConnectionIntegrationIDEnum: %s", s)
+	}
+}
+
 type ConnectionStatusEnum string
 
 const (
@@ -17,6 +40,24 @@ const (
 	ConnectionStatusEnumInitialSync   ConnectionStatusEnum = "INITIAL_SYNC"
 	ConnectionStatusEnumReady         ConnectionStatusEnum = "READY"
 )
+
+func (e *ConnectionStatusEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "NEW_CONNECTION":
+		fallthrough
+	case "INITIAL_SYNC":
+		fallthrough
+	case "READY":
+		*e = ConnectionStatusEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ConnectionStatusEnum: %s", s)
+	}
+}
 
 type Connection struct {
 	ConnectionID  *string                      `json:"connectionId,omitempty"`

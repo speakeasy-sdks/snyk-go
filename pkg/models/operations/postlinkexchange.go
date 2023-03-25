@@ -3,6 +3,8 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
 	"net/http"
 )
@@ -27,6 +29,24 @@ const (
 	PostLinkExchange200ApplicationJSONIntegrationIDEnumHubspot    PostLinkExchange200ApplicationJSONIntegrationIDEnum = "hubspot"
 	PostLinkExchange200ApplicationJSONIntegrationIDEnumPipedrive  PostLinkExchange200ApplicationJSONIntegrationIDEnum = "pipedrive"
 )
+
+func (e *PostLinkExchange200ApplicationJSONIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "salesforce":
+		fallthrough
+	case "hubspot":
+		fallthrough
+	case "pipedrive":
+		*e = PostLinkExchange200ApplicationJSONIntegrationIDEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for PostLinkExchange200ApplicationJSONIntegrationIDEnum: %s", s)
+	}
+}
 
 // PostLinkExchange200ApplicationJSON - Exchange for access token
 type PostLinkExchange200ApplicationJSON struct {

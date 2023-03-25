@@ -2,9 +2,84 @@
 
 package shared
 
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+)
+
+type FieldOptionsNameType string
+
+const (
+	FieldOptionsNameTypeStr    FieldOptionsNameType = "str"
+	FieldOptionsNameTypeNumber FieldOptionsNameType = "number"
+)
+
+type FieldOptionsName struct {
+	Str    *string
+	Number *float64
+
+	Type FieldOptionsNameType
+}
+
+func CreateFieldOptionsNameStr(str string) FieldOptionsName {
+	typ := FieldOptionsNameTypeStr
+
+	return FieldOptionsName{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateFieldOptionsNameNumber(number float64) FieldOptionsName {
+	typ := FieldOptionsNameTypeNumber
+
+	return FieldOptionsName{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func (u *FieldOptionsName) UnmarshalJSON(data []byte) error {
+	var d *json.Decoder
+
+	str := new(string)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&str); err == nil {
+		u.Str = str
+		u.Type = FieldOptionsNameTypeStr
+		return nil
+	}
+
+	number := new(float64)
+	d = json.NewDecoder(bytes.NewReader(data))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&number); err == nil {
+		u.Number = number
+		u.Type = FieldOptionsNameTypeNumber
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u FieldOptionsName) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return json.Marshal(u.Str)
+	}
+
+	if u.Number != nil {
+		return json.Marshal(u.Number)
+	}
+
+	return nil, nil
+}
+
 type FieldOptions struct {
-	Key  *string     `json:"key,omitempty"`
-	Name interface{} `json:"name,omitempty"`
+	Key  *string           `json:"key,omitempty"`
+	Name *FieldOptionsName `json:"name,omitempty"`
 }
 
 type FieldTypeEnum string
@@ -29,6 +104,54 @@ const (
 	FieldTypeEnumTime         FieldTypeEnum = "time"
 	FieldTypeEnumObject       FieldTypeEnum = "object"
 )
+
+func (e *FieldTypeEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "string":
+		fallthrough
+	case "number":
+		fallthrough
+	case "datetime":
+		fallthrough
+	case "date":
+		fallthrough
+	case "boolean":
+		fallthrough
+	case "reference":
+		fallthrough
+	case "phone":
+		fallthrough
+	case "url":
+		fallthrough
+	case "id":
+		fallthrough
+	case "email":
+		fallthrough
+	case "percent":
+		fallthrough
+	case "singleselect":
+		fallthrough
+	case "multiselect":
+		fallthrough
+	case "address":
+		fallthrough
+	case "daterange":
+		fallthrough
+	case "decimal":
+		fallthrough
+	case "time":
+		fallthrough
+	case "object":
+		*e = FieldTypeEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for FieldTypeEnum: %s", s)
+	}
+}
 
 // Field - (Alias: property) A field is a key-value pair on a CRM Object that provides information about that object.
 type Field struct {

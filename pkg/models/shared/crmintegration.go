@@ -2,6 +2,11 @@
 
 package shared
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type CrmIntegrationIntegrationIDEnum string
 
 const (
@@ -9,6 +14,24 @@ const (
 	CrmIntegrationIntegrationIDEnumHubspot    CrmIntegrationIntegrationIDEnum = "hubspot"
 	CrmIntegrationIntegrationIDEnumPipedrive  CrmIntegrationIntegrationIDEnum = "pipedrive"
 )
+
+func (e *CrmIntegrationIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return err
+	}
+	switch s {
+	case "salesforce":
+		fallthrough
+	case "hubspot":
+		fallthrough
+	case "pipedrive":
+		*e = CrmIntegrationIntegrationIDEnum(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CrmIntegrationIntegrationIDEnum: %s", s)
+	}
+}
 
 type CrmIntegration struct {
 	// Base 64 data URI
