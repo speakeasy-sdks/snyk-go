@@ -13,10 +13,6 @@ type PutTaskRequestBody struct {
 	Task        *shared.TaskUpdate `json:"task,omitempty"`
 }
 
-type PutTaskRequest struct {
-	Request *PutTaskRequestBody `request:"mediaType=application/json"`
-}
-
 // PutTask200ApplicationJSON - OK
 type PutTask200ApplicationJSON struct {
 	ID string `json:"id"`

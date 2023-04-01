@@ -3,21 +3,15 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
 	"net/http"
 )
 
 type DeleteConnectionSecurity struct {
-	VesselAPIToken shared.SchemeVesselAPIToken `security:"scheme,type=apiKey,subtype=header"`
+	VesselAPIToken string `security:"scheme,type=apiKey,subtype=header,name=vessel-api-token"`
 }
 
 type DeleteConnectionRequestBody struct {
 	AccessToken *string `json:"accessToken,omitempty"`
-}
-
-type DeleteConnectionRequest struct {
-	Request  *DeleteConnectionRequestBody `request:"mediaType=application/json"`
-	Security DeleteConnectionSecurity
 }
 
 type DeleteConnectionResponse struct {

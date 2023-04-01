@@ -6,10 +6,6 @@ import (
 	"net/http"
 )
 
-type PutContactRawRequest struct {
-	Request []byte `request:"mediaType=application/xml"`
-}
-
 // PutContactRaw200ApplicationJSON - OK
 type PutContactRaw200ApplicationJSON struct {
 	ID string `json:"id"`

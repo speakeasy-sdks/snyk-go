@@ -13,10 +13,6 @@ type PostContactRequestBody struct {
 	Contact shared.ContactCreate `json:"contact"`
 }
 
-type PostContactRequest struct {
-	Request *PostContactRequestBody `request:"mediaType=application/json"`
-}
-
 // PostContact200ApplicationJSON - OK
 type PostContact200ApplicationJSON struct {
 	ID *string `json:"id,omitempty"`

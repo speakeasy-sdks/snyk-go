@@ -7,16 +7,12 @@ import (
 	"net/http"
 )
 
-type GetCrmUsersQueryParams struct {
+type GetCrmUsersRequest struct {
 	// The token for the customer's CRM account. This was generated when they connected their account.
 	AccessToken string `queryParam:"style=form,explode=true,name=accessToken"`
 	// Returns all fields including non-unifiable and custom fields under the "additional" property in the response
 	AllFields *bool   `queryParam:"style=form,explode=true,name=allFields"`
 	Cursor    *string `queryParam:"style=form,explode=true,name=cursor"`
-}
-
-type GetCrmUsersRequest struct {
-	QueryParams GetCrmUsersQueryParams
 }
 
 // GetCrmUsers200ApplicationJSON - OK

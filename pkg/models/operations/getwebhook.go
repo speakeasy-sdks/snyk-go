@@ -7,14 +7,10 @@ import (
 	"net/http"
 )
 
-type GetWebhookQueryParams struct {
+type GetWebhookRequest struct {
 	// The token for the customer's CRM account. This was generated when they connected their account.
 	AccessToken *string `queryParam:"style=form,explode=true,name=accessToken"`
 	WebhookID   *string `queryParam:"style=form,explode=true,name=webhookId"`
-}
-
-type GetWebhookRequest struct {
-	QueryParams GetWebhookQueryParams
 }
 
 // GetWebhook200ApplicationJSON - OK

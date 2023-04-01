@@ -13,10 +13,6 @@ type PostNoteRequestBody struct {
 	Note shared.NoteCreate `json:"note"`
 }
 
-type PostNoteRequest struct {
-	Request *PostNoteRequestBody `request:"mediaType=application/json"`
-}
-
 // PostNote200ApplicationJSON - OK
 type PostNote200ApplicationJSON struct {
 	ID string `json:"id"`

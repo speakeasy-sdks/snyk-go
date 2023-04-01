@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type GetContactQueryParams struct {
+type GetContactRequest struct {
 	// The token for the customer's CRM account. This was generated when they connected their account.
 	AccessToken string `queryParam:"style=form,explode=true,name=accessToken"`
 	// Returns all fields including non-unifiable and custom fields under the "additional" property in the response
@@ -16,10 +16,6 @@ type GetContactQueryParams struct {
 	Email *string `queryParam:"style=form,explode=true,name=email"`
 	// The id of the contact to get (takes precedence over email when both are included)
 	ID *string `queryParam:"style=form,explode=true,name=id"`
-}
-
-type GetContactRequest struct {
-	QueryParams GetContactQueryParams
 }
 
 // GetContact200ApplicationJSON - OK

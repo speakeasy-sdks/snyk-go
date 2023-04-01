@@ -14,10 +14,6 @@ type PutNoteRequestBody struct {
 	Note shared.NoteUpdate `json:"note"`
 }
 
-type PutNoteRequest struct {
-	Request *PutNoteRequestBody `request:"mediaType=application/json"`
-}
-
 // PutNote200ApplicationJSON - OK
 type PutNote200ApplicationJSON struct {
 	ID string `json:"id"`

@@ -86,8 +86,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Snyk {
 	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.10.0",
-		_genVersion: "2.16.5",
+		_sdkVersion: "0.10.1",
+		_genVersion: "2.16.7",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -116,7 +116,7 @@ func New(opts ...SDKOption) *Snyk {
 // Remove a connection for a given `accessToken`. Removing a connection disconnects the user's CRM so they'll need to re-authenticate should they want to re-connect their CRM.
 //
 // For CRMs that support it (such as Pipedrive), removing the `accessToken` will also remove the Vessel app from their CRM.
-func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequest) (*operations.DeleteConnectionResponse, error) {
+func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteConnectionRequestBody, security operations.DeleteConnectionSecurity) (*operations.DeleteConnectionResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/connection"
 
@@ -132,7 +132,7 @@ func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteCo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -169,7 +169,7 @@ func (s *Snyk) DeleteConnection(ctx context.Context, request operations.DeleteCo
 
 // DeleteWebhook - Remove Webhook
 // Removes a webhook for a given connection and id
-func (s *Snyk) DeleteWebhook(ctx context.Context, request operations.DeleteWebhookRequest) (*operations.DeleteWebhookResponse, error) {
+func (s *Snyk) DeleteWebhook(ctx context.Context, request operations.DeleteWebhookRequestBody) (*operations.DeleteWebhookResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
@@ -221,7 +221,7 @@ func (s *Snyk) GetAccount(ctx context.Context, request operations.GetAccountRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -272,7 +272,7 @@ func (s *Snyk) GetAccountDetails(ctx context.Context, request operations.GetAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -321,7 +321,7 @@ func (s *Snyk) GetConnection(ctx context.Context, request operations.GetConnecti
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -415,7 +415,7 @@ func (s *Snyk) GetContact(ctx context.Context, request operations.GetContactRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -466,7 +466,7 @@ func (s *Snyk) GetContactDetails(ctx context.Context, request operations.GetCont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -515,7 +515,7 @@ func (s *Snyk) GetContacts(ctx context.Context, request operations.GetContactsRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -567,7 +567,7 @@ func (s *Snyk) GetCrmAccounts(ctx context.Context, request operations.GetCrmAcco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -616,7 +616,7 @@ func (s *Snyk) GetCrmDeals(ctx context.Context, request operations.GetCrmDealsRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -665,7 +665,7 @@ func (s *Snyk) GetCrmUsers(ctx context.Context, request operations.GetCrmUsersRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -714,7 +714,7 @@ func (s *Snyk) GetDeal(ctx context.Context, request operations.GetDealRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -765,7 +765,7 @@ func (s *Snyk) GetDealDetails(ctx context.Context, request operations.GetDealDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -814,7 +814,7 @@ func (s *Snyk) GetEvent(ctx context.Context, request operations.GetEventRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -863,7 +863,7 @@ func (s *Snyk) GetEventAttendee(ctx context.Context, request operations.GetEvent
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -914,7 +914,7 @@ func (s *Snyk) GetEventAttendeeDetails(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -963,7 +963,7 @@ func (s *Snyk) GetEventAttendees(ctx context.Context, request operations.GetEven
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1014,7 +1014,7 @@ func (s *Snyk) GetEventDetails(ctx context.Context, request operations.GetEventD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1063,7 +1063,7 @@ func (s *Snyk) GetEvents(ctx context.Context, request operations.GetEventsReques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1157,7 +1157,7 @@ func (s *Snyk) GetLead(ctx context.Context, request operations.GetLeadRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1208,7 +1208,7 @@ func (s *Snyk) GetLeadDetails(ctx context.Context, request operations.GetLeadDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1260,7 +1260,7 @@ func (s *Snyk) GetLeads(ctx context.Context, request operations.GetLeadsRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1309,7 +1309,7 @@ func (s *Snyk) GetNote(ctx context.Context, request operations.GetNoteRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1360,7 +1360,7 @@ func (s *Snyk) GetNoteDetails(ctx context.Context, request operations.GetNoteDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1409,7 +1409,7 @@ func (s *Snyk) GetNotes(ctx context.Context, request operations.GetNotesRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1458,7 +1458,7 @@ func (s *Snyk) GetTask(ctx context.Context, request operations.GetTaskRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1509,7 +1509,7 @@ func (s *Snyk) GetTaskDetails(ctx context.Context, request operations.GetTaskDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1558,7 +1558,7 @@ func (s *Snyk) GetTasks(ctx context.Context, request operations.GetTasksRequest)
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1607,7 +1607,7 @@ func (s *Snyk) GetUser(ctx context.Context, request operations.GetUserRequest) (
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1658,7 +1658,7 @@ func (s *Snyk) GetUserDetails(ctx context.Context, request operations.GetUserDet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1707,7 +1707,7 @@ func (s *Snyk) GetWebhook(ctx context.Context, request operations.GetWebhookRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	if err := utils.PopulateQueryParams(ctx, req, request.QueryParams, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1792,7 +1792,7 @@ func (s *Snyk) PatchEventAttendee(ctx context.Context) (*operations.PatchEventAt
 
 // PostAccount - Create Account
 // Create a new Account
-func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRequest) (*operations.PostAccountResponse, error) {
+func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRequestBody) (*operations.PostAccountResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
@@ -1844,7 +1844,7 @@ func (s *Snyk) PostAccount(ctx context.Context, request operations.PostAccountRe
 
 // PostContact - Create Contact
 // Create a new contact.
-func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRequest) (*operations.PostContactResponse, error) {
+func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRequestBody) (*operations.PostContactResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -1899,7 +1899,7 @@ func (s *Snyk) PostContact(ctx context.Context, request operations.PostContactRe
 //
 // *CRM Caveats*:
 // - Salesforce: You may only associate a Task with either a Lead or a Contact *and* either a Deal or an Account.
-func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRequest) (*operations.PostCrmTaskResponse, error) {
+func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRequestBody) (*operations.PostCrmTaskResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 
@@ -1951,7 +1951,7 @@ func (s *Snyk) PostCrmTask(ctx context.Context, request operations.PostCrmTaskRe
 
 // PostDeal - Create Deal
 // Create a new Deal
-func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequest) (*operations.PostDealResponse, error) {
+func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequestBody) (*operations.PostDealResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
@@ -2003,7 +2003,7 @@ func (s *Snyk) PostDeal(ctx context.Context, request operations.PostDealRequest)
 
 // PostEvent - Create Event
 // Create a new Event.
-func (s *Snyk) PostEvent(ctx context.Context, request operations.PostEventRequest) (*operations.PostEventResponse, error) {
+func (s *Snyk) PostEvent(ctx context.Context, request operations.PostEventRequestBody) (*operations.PostEventResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
@@ -2100,7 +2100,7 @@ func (s *Snyk) PostEventAttendee(ctx context.Context) (*operations.PostEventAtte
 
 // PostLead - Create Lead
 // Create a new Lead
-func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequest) (*operations.PostLeadResponse, error) {
+func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequestBody) (*operations.PostLeadResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
@@ -2152,7 +2152,7 @@ func (s *Snyk) PostLead(ctx context.Context, request operations.PostLeadRequest)
 
 // PostLinkExchange - Exchange public token for access token
 // Exchanges the public token for an access token used to interact with the account. Store the access token in a secure location.
-func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLinkExchangeRequest) (*operations.PostLinkExchangeResponse, error) {
+func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLinkExchangeRequestBody, security operations.PostLinkExchangeSecurity) (*operations.PostLinkExchangeResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/exchange"
 
@@ -2168,7 +2168,7 @@ func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLink
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2204,7 +2204,7 @@ func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLink
 
 // PostLinkToken - Create link token
 // Generates a link token to be used during the auhtentication flow. This token is passed to either the Vessel Link Component or `useVesselLink` hook.
-func (s *Snyk) PostLinkToken(ctx context.Context, request operations.PostLinkTokenRequest) (*operations.PostLinkTokenResponse, error) {
+func (s *Snyk) PostLinkToken(ctx context.Context) (*operations.PostLinkTokenResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/token"
 
@@ -2213,7 +2213,7 @@ func (s *Snyk) PostLinkToken(ctx context.Context, request operations.PostLinkTok
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2252,7 +2252,7 @@ func (s *Snyk) PostLinkToken(ctx context.Context, request operations.PostLinkTok
 //
 // *CRM Caveats*:
 // - Salesforce: You may only associate a Note with one entity.
-func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequest) (*operations.PostNoteResponse, error) {
+func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequestBody) (*operations.PostNoteResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
@@ -2304,7 +2304,7 @@ func (s *Snyk) PostNote(ctx context.Context, request operations.PostNoteRequest)
 
 // PostWebhook - Create Webhook
 // Create a new webhook for a given connection
-func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRequest) (*operations.PostWebhookResponse, error) {
+func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRequestBody) (*operations.PostWebhookResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/connection/webhook"
 
@@ -2356,7 +2356,7 @@ func (s *Snyk) PostWebhook(ctx context.Context, request operations.PostWebhookRe
 
 // PutAccount - Update Account
 // Update an existing Account
-func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequest) (*operations.PutAccountResponse, error) {
+func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequestBody) (*operations.PutAccountResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/account"
 
@@ -2408,7 +2408,7 @@ func (s *Snyk) PutAccount(ctx context.Context, request operations.PutAccountRequ
 
 // PutContactJSON - Update Contact
 // Update an existing Contact.
-func (s *Snyk) PutContactJSON(ctx context.Context, request operations.PutContactJSONRequest) (*operations.PutContactJSONResponse, error) {
+func (s *Snyk) PutContactJSON(ctx context.Context, request operations.PutContactApplicationJSON) (*operations.PutContactJSONResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -2460,7 +2460,7 @@ func (s *Snyk) PutContactJSON(ctx context.Context, request operations.PutContact
 
 // PutContactRaw - Update Contact
 // Update an existing Contact.
-func (s *Snyk) PutContactRaw(ctx context.Context, request operations.PutContactRawRequest) (*operations.PutContactRawResponse, error) {
+func (s *Snyk) PutContactRaw(ctx context.Context, request []byte) (*operations.PutContactRawResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/contact"
 
@@ -2512,7 +2512,7 @@ func (s *Snyk) PutContactRaw(ctx context.Context, request operations.PutContactR
 
 // PutDeal - Update Deal
 // Update an existing Deal
-func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequest) (*operations.PutDealResponse, error) {
+func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequestBody) (*operations.PutDealResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/deal"
 
@@ -2564,7 +2564,7 @@ func (s *Snyk) PutDeal(ctx context.Context, request operations.PutDealRequest) (
 
 // PutEvent - Update Event
 // Update an existing Event by Id
-func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequest) (*operations.PutEventResponse, error) {
+func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequestBody) (*operations.PutEventResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/event"
 
@@ -2616,7 +2616,7 @@ func (s *Snyk) PutEvent(ctx context.Context, request operations.PutEventRequest)
 
 // PutLead - Update Lead
 // Update an existing Lead by Id
-func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequest) (*operations.PutLeadResponse, error) {
+func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequestBody) (*operations.PutLeadResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/lead"
 
@@ -2668,7 +2668,7 @@ func (s *Snyk) PutLead(ctx context.Context, request operations.PutLeadRequest) (
 
 // PutNote - Update Note
 // Update an existing Note by Id
-func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequest) (*operations.PutNoteResponse, error) {
+func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequestBody) (*operations.PutNoteResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/note"
 
@@ -2720,7 +2720,7 @@ func (s *Snyk) PutNote(ctx context.Context, request operations.PutNoteRequest) (
 
 // PutTask - Update Task
 // Update an existing Task by Id
-func (s *Snyk) PutTask(ctx context.Context, request operations.PutTaskRequest) (*operations.PutTaskResponse, error) {
+func (s *Snyk) PutTask(ctx context.Context, request operations.PutTaskRequestBody) (*operations.PutTaskResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/crm/task"
 

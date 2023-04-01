@@ -7,13 +7,9 @@ import (
 	"net/http"
 )
 
-type GetConnectionQueryParams struct {
+type GetConnectionRequest struct {
 	// The token for the customer's CRM account. This was generated when they connected their account.
 	AccessToken string `queryParam:"style=form,explode=true,name=accessToken"`
-}
-
-type GetConnectionRequest struct {
-	QueryParams GetConnectionQueryParams
 }
 
 // GetConnection200ApplicationJSON - OK

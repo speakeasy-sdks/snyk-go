@@ -13,10 +13,6 @@ type PutAccountRequestBody struct {
 	ID          string               `json:"id"`
 }
 
-type PutAccountRequest struct {
-	Request *PutAccountRequestBody `request:"mediaType=application/json"`
-}
-
 // PutAccount200ApplicationJSON - OK
 type PutAccount200ApplicationJSON struct {
 	ID string `json:"id"`

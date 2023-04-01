@@ -42,19 +42,14 @@ import (
 func main() {
     s := snyk.New()
 
-    req := operations.DeleteConnectionRequest{
-        Security: operations.DeleteConnectionSecurity{
-            VesselAPIToken: shared.SchemeVesselAPIToken{
-                APIKey: "YOUR_API_KEY_HERE",
-            },
-        },
-        Request: &operations.DeleteConnectionRequestBody{
-            AccessToken: "unde",
-        },
+    req := operations.DeleteConnectionRequestBody{
+        AccessToken: "corrupti",
     }
 
     ctx := context.Background()
-    res, err := s.DeleteConnection(ctx, req)
+    res, err := s.DeleteConnection(ctx, req, operations.DeleteConnectionSecurity{
+        VesselAPIToken: "YOUR_API_KEY_HERE",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -67,7 +62,7 @@ func main() {
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-## SDK Available Operations
+## Available Resources and Operations
 
 ### Snyk SDK
 

@@ -13,10 +13,6 @@ type PostWebhookRequestBody struct {
 	Webhook *shared.WebhookMetadataCreate `json:"webhook,omitempty"`
 }
 
-type PostWebhookRequest struct {
-	Request *PostWebhookRequestBody `request:"mediaType=application/json"`
-}
-
 // PostWebhook200ApplicationJSON - OK
 type PostWebhook200ApplicationJSON struct {
 	Webhook *shared.WebhookMetadata `json:"webhook,omitempty"`

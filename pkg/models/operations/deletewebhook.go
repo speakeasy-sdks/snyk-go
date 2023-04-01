@@ -11,10 +11,6 @@ type DeleteWebhookRequestBody struct {
 	WebhookID   *string `json:"webhookId,omitempty"`
 }
 
-type DeleteWebhookRequest struct {
-	Request *DeleteWebhookRequestBody `request:"mediaType=application/json"`
-}
-
 type DeleteWebhookResponse struct {
 	ContentType string
 	StatusCode  int

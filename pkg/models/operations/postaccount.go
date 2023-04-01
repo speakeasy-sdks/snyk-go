@@ -12,10 +12,6 @@ type PostAccountRequestBody struct {
 	Account     shared.AccountCreate `json:"account"`
 }
 
-type PostAccountRequest struct {
-	Request *PostAccountRequestBody `request:"mediaType=application/json"`
-}
-
 // PostAccount200ApplicationJSON - OK
 type PostAccount200ApplicationJSON struct {
 	ID *string `json:"id,omitempty"`

@@ -12,10 +12,6 @@ type PostEventRequestBody struct {
 	Event       *shared.EventCreate `json:"event,omitempty"`
 }
 
-type PostEventRequest struct {
-	Request *PostEventRequestBody `request:"mediaType=application/json"`
-}
-
 // PostEvent200ApplicationJSON - OK
 type PostEvent200ApplicationJSON struct {
 	ID string `json:"id"`

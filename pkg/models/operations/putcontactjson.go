@@ -14,10 +14,6 @@ type PutContactApplicationJSON struct {
 	ID      string               `json:"id"`
 }
 
-type PutContactJSONRequest struct {
-	Request *PutContactApplicationJSON `request:"mediaType=application/json"`
-}
-
 // PutContactJSON200ApplicationJSON - OK
 type PutContactJSON200ApplicationJSON struct {
 	ID string `json:"id"`

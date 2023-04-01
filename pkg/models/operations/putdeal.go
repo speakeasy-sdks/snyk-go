@@ -13,10 +13,6 @@ type PutDealRequestBody struct {
 	ID          string            `json:"id"`
 }
 
-type PutDealRequest struct {
-	Request *PutDealRequestBody `request:"mediaType=application/json"`
-}
-
 // PutDeal200ApplicationJSON - OK
 type PutDeal200ApplicationJSON struct {
 	ID string `json:"id"`

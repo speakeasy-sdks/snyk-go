@@ -12,10 +12,6 @@ type PostLeadRequestBody struct {
 	Lead        shared.LeadCreate `json:"lead"`
 }
 
-type PostLeadRequest struct {
-	Request *PostLeadRequestBody `request:"mediaType=application/json"`
-}
-
 // PostLead200ApplicationJSON - OK
 type PostLead200ApplicationJSON struct {
 	ID string `json:"id"`

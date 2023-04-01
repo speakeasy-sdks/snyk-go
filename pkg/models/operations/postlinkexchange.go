@@ -5,21 +5,15 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
 	"net/http"
 )
 
 type PostLinkExchangeSecurity struct {
-	VesselAPIToken shared.SchemeVesselAPIToken `security:"scheme,type=apiKey,subtype=header"`
+	VesselAPIToken string `security:"scheme,type=apiKey,subtype=header,name=vessel-api-token"`
 }
 
 type PostLinkExchangeRequestBody struct {
 	PublicToken string `json:"publicToken"`
-}
-
-type PostLinkExchangeRequest struct {
-	Request  *PostLinkExchangeRequestBody `request:"mediaType=application/json"`
-	Security PostLinkExchangeSecurity
 }
 
 type PostLinkExchange200ApplicationJSONIntegrationIDEnum string

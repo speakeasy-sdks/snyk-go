@@ -13,10 +13,6 @@ type PutEventRequestBody struct {
 	ID          string              `json:"id"`
 }
 
-type PutEventRequest struct {
-	Request *PutEventRequestBody `request:"mediaType=application/json"`
-}
-
 // PutEvent200ApplicationJSON - OK
 type PutEvent200ApplicationJSON struct {
 	ID string `json:"id"`

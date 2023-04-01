@@ -12,10 +12,6 @@ type PostDealRequestBody struct {
 	Deal        shared.DealCreate `json:"deal"`
 }
 
-type PostDealRequest struct {
-	Request *PostDealRequestBody `request:"mediaType=application/json"`
-}
-
 // PostDeal200ApplicationJSON - OK
 type PostDeal200ApplicationJSON struct {
 	ID string `json:"id"`

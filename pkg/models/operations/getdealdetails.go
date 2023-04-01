@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type GetDealDetailsQueryParams struct {
+type GetDealDetailsRequest struct {
 	// The token for the customer's CRM account. This was generated when they connected their account.
 	AccessToken string `queryParam:"style=form,explode=true,name=accessToken"`
 	// Returns details about native fields.
@@ -15,10 +15,6 @@ type GetDealDetailsQueryParams struct {
 	Cursor    *string `queryParam:"style=form,explode=true,name=cursor"`
 	// If provided, get the details about a particular deal. If not provided, get details about all deals.
 	ID *string `queryParam:"style=form,explode=true,name=id"`
-}
-
-type GetDealDetailsRequest struct {
-	QueryParams GetDealDetailsQueryParams
 }
 
 // GetDealDetails200ApplicationJSON - OK

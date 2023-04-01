@@ -12,10 +12,6 @@ type PostCrmTaskRequestBody struct {
 	Task        *shared.TaskCreate `json:"task,omitempty"`
 }
 
-type PostCrmTaskRequest struct {
-	Request *PostCrmTaskRequestBody `request:"mediaType=application/json"`
-}
-
 // PostCrmTask200ApplicationJSON - OK
 type PostCrmTask200ApplicationJSON struct {
 	ID string `json:"id"`

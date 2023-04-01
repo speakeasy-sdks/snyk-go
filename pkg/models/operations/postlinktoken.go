@@ -3,17 +3,8 @@
 package operations
 
 import (
-	"github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
 	"net/http"
 )
-
-type PostLinkTokenSecurity struct {
-	VesselAPIToken shared.SchemeVesselAPIToken `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type PostLinkTokenRequest struct {
-	Security PostLinkTokenSecurity
-}
 
 // PostLinkToken200ApplicationJSON - Create link token
 type PostLinkToken200ApplicationJSON struct {

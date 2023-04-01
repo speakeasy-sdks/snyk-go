@@ -12,10 +12,6 @@ type PutLeadRequestBody struct {
 	Lead        *shared.LeadUpdate `json:"lead,omitempty"`
 }
 
-type PutLeadRequest struct {
-	Request *PutLeadRequestBody `request:"mediaType=application/json"`
-}
-
 // PutLead200ApplicationJSON - OK
 type PutLead200ApplicationJSON struct {
 	ID string `json:"id"`
