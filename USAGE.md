@@ -13,11 +13,11 @@ import (
 func main() {
     s := snyk.New()
 
+    ctx := context.Background()    
     req := operations.DeleteConnectionRequestBody{
         AccessToken: "corrupti",
     }
 
-    ctx := context.Background()
     res, err := s.DeleteConnection(ctx, req, operations.DeleteConnectionSecurity{
         VesselAPIToken: "YOUR_API_KEY_HERE",
     })
