@@ -24,6 +24,10 @@ const (
 	PostLinkExchange200ApplicationJSONIntegrationIDEnumPipedrive  PostLinkExchange200ApplicationJSONIntegrationIDEnum = "pipedrive"
 )
 
+func (e PostLinkExchange200ApplicationJSONIntegrationIDEnum) ToPointer() *PostLinkExchange200ApplicationJSONIntegrationIDEnum {
+	return &e
+}
+
 func (e *PostLinkExchange200ApplicationJSONIntegrationIDEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {

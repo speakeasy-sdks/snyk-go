@@ -31,12 +31,11 @@ For more information about authentication, refer to the overview in the API refe
 ```go
 package main
 
-import (
-    "context"
-    "log"
-    "github.com/speakeasy-sdks/snyk-go"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/snyk-go"
+	"github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
 )
 
 func main() {
@@ -44,7 +43,7 @@ func main() {
 
     ctx := context.Background()    
     req := operations.DeleteConnectionRequestBody{
-        AccessToken: "corrupti",
+        AccessToken: snyk.String("corrupti"),
     }
 
     res, err := s.DeleteConnection(ctx, req, operations.DeleteConnectionSecurity{
@@ -64,61 +63,61 @@ func main() {
 <!-- Start SDK Available Operations -->
 ## Available Resources and Operations
 
-### Snyk SDK
+### [Snyk SDK](docs/snyk/README.md)
 
-* `DeleteConnection` - Delete connection
-* `DeleteWebhook` - Remove Webhook
-* `GetAccount` - Get Account
-* `GetAccountDetails` - Get Account Details
-* `GetConnection` - Get Connection
-* `GetConnections` - Get All Connections
-* `GetContact` - Get Contact
-* `GetContactDetails` - Get Contact Details
-* `GetContacts` - Get All Contacts
-* `GetCrmAccounts` - Get All Accounts
-* `GetCrmDeals` - Get All Deals
-* `GetCrmUsers` - Get All Users
-* `GetDeal` - Get Deal
-* `GetDealDetails` - Get Deal Details
-* `GetEvent` - Get Event
-* `GetEventAttendee` - Get Event Attendee
-* `GetEventAttendeeDetails` - Get Event Attendee Details
-* `GetEventAttendees` - Get All Event Attendees
-* `GetEventDetails` - Get Event Details
-* `GetEvents` - Get All Events
-* `GetIntegrations` - Get CRM Integrations
-* `GetLead` - Get Lead
-* `GetLeadDetails` - Get Lead Details
-* `GetLeads` - Get all Leads
-* `GetNote` - Get Note
-* `GetNoteDetails` - Get Note Details
-* `GetNotes` - Get All Notes
-* `GetTask` - Get Task
-* `GetTaskDetails` - Get Task Details
-* `GetTasks` - Get All Tasks
-* `GetUser` - Get User
-* `GetUserDetails` - Get User Details
-* `GetWebhook` - Get Webhook
-* `PatchEventAttendee` - Update Event Attendee
-* `PostAccount` - Create Account
-* `PostContact` - Create Contact
-* `PostCrmTask` - Create Task
-* `PostDeal` - Create Deal
-* `PostEvent` - Create Event
-* `PostEventAttendee` - Create Event Attendee
-* `PostLead` - Create Lead
-* `PostLinkExchange` - Exchange public token for access token
-* `PostLinkToken` - Create link token
-* `PostNote` - Create Note
-* `PostWebhook` - Create Webhook
-* `PutAccount` - Update Account
-* `PutContactJSON` - Update Contact
-* `PutContactRaw` - Update Contact
-* `PutDeal` - Update Deal
-* `PutEvent` - Update Event
-* `PutLead` - Update Lead
-* `PutNote` - Update Note
-* `PutTask` - Update Task
+* [DeleteConnection](docs/snyk/README.md#deleteconnection) - Delete connection
+* [DeleteWebhook](docs/snyk/README.md#deletewebhook) - Remove Webhook
+* [GetAccount](docs/snyk/README.md#getaccount) - Get Account
+* [GetAccountDetails](docs/snyk/README.md#getaccountdetails) - Get Account Details
+* [GetConnection](docs/snyk/README.md#getconnection) - Get Connection
+* [GetConnections](docs/snyk/README.md#getconnections) - Get All Connections
+* [GetContact](docs/snyk/README.md#getcontact) - Get Contact
+* [GetContactDetails](docs/snyk/README.md#getcontactdetails) - Get Contact Details
+* [GetContacts](docs/snyk/README.md#getcontacts) - Get All Contacts
+* [GetCrmAccounts](docs/snyk/README.md#getcrmaccounts) - Get All Accounts
+* [GetCrmDeals](docs/snyk/README.md#getcrmdeals) - Get All Deals
+* [GetCrmUsers](docs/snyk/README.md#getcrmusers) - Get All Users
+* [GetDeal](docs/snyk/README.md#getdeal) - Get Deal
+* [GetDealDetails](docs/snyk/README.md#getdealdetails) - Get Deal Details
+* [GetEvent](docs/snyk/README.md#getevent) - Get Event
+* [GetEventAttendee](docs/snyk/README.md#geteventattendee) - Get Event Attendee
+* [GetEventAttendeeDetails](docs/snyk/README.md#geteventattendeedetails) - Get Event Attendee Details
+* [GetEventAttendees](docs/snyk/README.md#geteventattendees) - Get All Event Attendees
+* [GetEventDetails](docs/snyk/README.md#geteventdetails) - Get Event Details
+* [GetEvents](docs/snyk/README.md#getevents) - Get All Events
+* [GetIntegrations](docs/snyk/README.md#getintegrations) - Get CRM Integrations
+* [GetLead](docs/snyk/README.md#getlead) - Get Lead
+* [GetLeadDetails](docs/snyk/README.md#getleaddetails) - Get Lead Details
+* [GetLeads](docs/snyk/README.md#getleads) - Get all Leads
+* [GetNote](docs/snyk/README.md#getnote) - Get Note
+* [GetNoteDetails](docs/snyk/README.md#getnotedetails) - Get Note Details
+* [GetNotes](docs/snyk/README.md#getnotes) - Get All Notes
+* [GetTask](docs/snyk/README.md#gettask) - Get Task
+* [GetTaskDetails](docs/snyk/README.md#gettaskdetails) - Get Task Details
+* [GetTasks](docs/snyk/README.md#gettasks) - Get All Tasks
+* [GetUser](docs/snyk/README.md#getuser) - Get User
+* [GetUserDetails](docs/snyk/README.md#getuserdetails) - Get User Details
+* [GetWebhook](docs/snyk/README.md#getwebhook) - Get Webhook
+* [PatchEventAttendee](docs/snyk/README.md#patcheventattendee) - Update Event Attendee
+* [PostAccount](docs/snyk/README.md#postaccount) - Create Account
+* [PostContact](docs/snyk/README.md#postcontact) - Create Contact
+* [PostCrmTask](docs/snyk/README.md#postcrmtask) - Create Task
+* [PostDeal](docs/snyk/README.md#postdeal) - Create Deal
+* [PostEvent](docs/snyk/README.md#postevent) - Create Event
+* [PostEventAttendee](docs/snyk/README.md#posteventattendee) - Create Event Attendee
+* [PostLead](docs/snyk/README.md#postlead) - Create Lead
+* [PostLinkExchange](docs/snyk/README.md#postlinkexchange) - Exchange public token for access token
+* [PostLinkToken](docs/snyk/README.md#postlinktoken) - Create link token
+* [PostNote](docs/snyk/README.md#postnote) - Create Note
+* [PostWebhook](docs/snyk/README.md#postwebhook) - Create Webhook
+* [PutAccount](docs/snyk/README.md#putaccount) - Update Account
+* [PutContactJSON](docs/snyk/README.md#putcontactjson) - Update Contact
+* [PutContactRaw](docs/snyk/README.md#putcontactraw) - Update Contact
+* [PutDeal](docs/snyk/README.md#putdeal) - Update Deal
+* [PutEvent](docs/snyk/README.md#putevent) - Update Event
+* [PutLead](docs/snyk/README.md#putlead) - Update Lead
+* [PutNote](docs/snyk/README.md#putnote) - Update Note
+* [PutTask](docs/snyk/README.md#puttask) - Update Task
 <!-- End SDK Available Operations -->
 
 ### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

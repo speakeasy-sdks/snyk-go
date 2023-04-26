@@ -15,6 +15,10 @@ const (
 	ConnectionIntegrationIDEnumPipedrive  ConnectionIntegrationIDEnum = "pipedrive"
 )
 
+func (e ConnectionIntegrationIDEnum) ToPointer() *ConnectionIntegrationIDEnum {
+	return &e
+}
+
 func (e *ConnectionIntegrationIDEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
@@ -40,6 +44,10 @@ const (
 	ConnectionStatusEnumInitialSync   ConnectionStatusEnum = "INITIAL_SYNC"
 	ConnectionStatusEnumReady         ConnectionStatusEnum = "READY"
 )
+
+func (e ConnectionStatusEnum) ToPointer() *ConnectionStatusEnum {
+	return &e
+}
 
 func (e *ConnectionStatusEnum) UnmarshalJSON(data []byte) error {
 	var s string

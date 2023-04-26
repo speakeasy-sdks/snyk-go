@@ -105,6 +105,10 @@ const (
 	FieldTypeEnumObject       FieldTypeEnum = "object"
 )
 
+func (e FieldTypeEnum) ToPointer() *FieldTypeEnum {
+	return &e
+}
+
 func (e *FieldTypeEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {

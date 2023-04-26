@@ -2,12 +2,11 @@
 ```go
 package main
 
-import (
-    "context"
-    "log"
-    "github.com/speakeasy-sdks/snyk-go"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/shared"
-    "github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
+import(
+	"context"
+	"log"
+	"github.com/speakeasy-sdks/snyk-go"
+	"github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
 )
 
 func main() {
@@ -15,7 +14,7 @@ func main() {
 
     ctx := context.Background()    
     req := operations.DeleteConnectionRequestBody{
-        AccessToken: "corrupti",
+        AccessToken: snyk.String("corrupti"),
     }
 
     res, err := s.DeleteConnection(ctx, req, operations.DeleteConnectionSecurity{

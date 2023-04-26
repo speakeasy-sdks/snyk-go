@@ -15,6 +15,10 @@ const (
 	CrmIntegrationIntegrationIDEnumPipedrive  CrmIntegrationIntegrationIDEnum = "pipedrive"
 )
 
+func (e CrmIntegrationIntegrationIDEnum) ToPointer() *CrmIntegrationIntegrationIDEnum {
+	return &e
+}
+
 func (e *CrmIntegrationIntegrationIDEnum) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
