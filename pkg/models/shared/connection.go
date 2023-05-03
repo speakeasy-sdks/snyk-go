@@ -20,20 +20,20 @@ func (e ConnectionIntegrationIDEnum) ToPointer() *ConnectionIntegrationIDEnum {
 }
 
 func (e *ConnectionIntegrationIDEnum) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
-	switch s {
+	switch v {
 	case "salesforce":
 		fallthrough
 	case "hubspot":
 		fallthrough
 	case "pipedrive":
-		*e = ConnectionIntegrationIDEnum(s)
+		*e = ConnectionIntegrationIDEnum(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ConnectionIntegrationIDEnum: %s", s)
+		return fmt.Errorf("invalid value for ConnectionIntegrationIDEnum: %v", v)
 	}
 }
 
@@ -50,20 +50,20 @@ func (e ConnectionStatusEnum) ToPointer() *ConnectionStatusEnum {
 }
 
 func (e *ConnectionStatusEnum) UnmarshalJSON(data []byte) error {
-	var s string
-	if err := json.Unmarshal(data, &s); err != nil {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
-	switch s {
+	switch v {
 	case "NEW_CONNECTION":
 		fallthrough
 	case "INITIAL_SYNC":
 		fallthrough
 	case "READY":
-		*e = ConnectionStatusEnum(s)
+		*e = ConnectionStatusEnum(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ConnectionStatusEnum: %s", s)
+		return fmt.Errorf("invalid value for ConnectionStatusEnum: %v", v)
 	}
 }
 

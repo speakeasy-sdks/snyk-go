@@ -87,12 +87,10 @@ import(
 func main() {
     s := snyk.New()
 
-    ctx := context.Background()    
-    req := operations.DeleteConnectionRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.DeleteConnection(ctx, operations.DeleteConnectionRequestBody{
         AccessToken: snyk.String("provident"),
-    }
-
-    res, err := s.Snyk.DeleteConnection(ctx, req, operations.DeleteConnectionSecurity{
+    }, operations.DeleteConnectionSecurity{
         VesselAPIToken: "YOUR_API_KEY_HERE",
     })
     if err != nil {
@@ -128,13 +126,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.DeleteWebhookRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.DeleteWebhook(ctx, operations.DeleteWebhookRequestBody{
         AccessToken: snyk.String("distinctio"),
         WebhookID: snyk.String("quibusdam"),
-    }
-
-    res, err := s.Snyk.DeleteWebhook(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -168,14 +164,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAccountRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetAccount(ctx, operations.GetAccountRequest{
         AccessToken: "unde",
         AllFields: snyk.Bool(false),
         ID: "d8d69a67-4e0f-4467-8c87-96ed151a05df",
-    }
-
-    res, err := s.Snyk.GetAccount(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -211,14 +205,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetAccountDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetAccountDetails(ctx, operations.GetAccountDetailsRequest{
         AccessToken: "quo",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("odit"),
-    }
-
-    res, err := s.Snyk.GetAccountDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -252,12 +244,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetConnectionRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetConnection(ctx, operations.GetConnectionRequest{
         AccessToken: "at",
-    }
-
-    res, err := s.Snyk.GetConnection(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -325,15 +315,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetContactRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetContact(ctx, operations.GetContactRequest{
         AccessToken: "at",
         AllFields: snyk.Bool(false),
         Email: snyk.String("Jaren.Schmidt52@hotmail.com"),
         ID: snyk.String("ca1ba928-fc81-4674-acb7-39205929396f"),
-    }
-
-    res, err := s.Snyk.GetContact(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -369,14 +357,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetContactDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetContactDetails(ctx, operations.GetContactDetailsRequest{
         AccessToken: "saepe",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("fuga"),
-    }
-
-    res, err := s.Snyk.GetContactDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -410,14 +396,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetContactsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetContacts(ctx, operations.GetContactsRequest{
         AccessToken: "in",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("corporis"),
-    }
-
-    res, err := s.Snyk.GetContacts(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -454,14 +438,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetCrmAccountsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetCrmAccounts(ctx, operations.GetCrmAccountsRequest{
         AccessToken: "iste",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("iure"),
-    }
-
-    res, err := s.Snyk.GetCrmAccounts(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -495,14 +477,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetCrmDealsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetCrmDeals(ctx, operations.GetCrmDealsRequest{
         AccessToken: "saepe",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("quidem"),
-    }
-
-    res, err := s.Snyk.GetCrmDeals(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -536,14 +516,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetCrmUsersRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetCrmUsers(ctx, operations.GetCrmUsersRequest{
         AccessToken: "architecto",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("ipsa"),
-    }
-
-    res, err := s.Snyk.GetCrmUsers(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -577,14 +555,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetDealRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetDeal(ctx, operations.GetDealRequest{
         AccessToken: "reiciendis",
         AllFields: snyk.Bool(false),
         ID: "aaa2352c-5955-4907-aff1-a3a2fa946773",
-    }
-
-    res, err := s.Snyk.GetDeal(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -620,15 +596,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetDealDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetDealDetails(ctx, operations.GetDealDetailsRequest{
         AccessToken: "error",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("quia"),
         ID: snyk.String("51aa52c3-f5ad-4019-9a1f-fe78f097b007"),
-    }
-
-    res, err := s.Snyk.GetDealDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -662,14 +636,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEvent(ctx, operations.GetEventRequest{
         AccessToken: "ut",
         AllFields: snyk.Bool(false),
         ID: "f15471b5-e6e1-43b9-9d48-8e1e91e450ad",
-    }
-
-    res, err := s.Snyk.GetEvent(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -703,14 +675,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventAttendeeRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEventAttendee(ctx, operations.GetEventAttendeeRequest{
         AccessToken: "explicabo",
         AllFields: snyk.Bool(false),
         ID: "abd44269-802d-4502-a94b-b4f63c969e9a",
-    }
-
-    res, err := s.Snyk.GetEventAttendee(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -746,14 +716,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventAttendeeDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEventAttendeeDetails(ctx, operations.GetEventAttendeeDetailsRequest{
         AccessToken: "dolor",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("debitis"),
-    }
-
-    res, err := s.Snyk.GetEventAttendeeDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -787,14 +755,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventAttendeesRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEventAttendees(ctx, operations.GetEventAttendeesRequest{
         AccessToken: snyk.String("a"),
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("dolorum"),
-    }
-
-    res, err := s.Snyk.GetEventAttendees(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -830,14 +796,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEventDetails(ctx, operations.GetEventDetailsRequest{
         AccessToken: "in",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("in"),
-    }
-
-    res, err := s.Snyk.GetEventDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -871,14 +835,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetEventsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetEvents(ctx, operations.GetEventsRequest{
         AccessToken: snyk.String("illum"),
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("maiores"),
-    }
-
-    res, err := s.Snyk.GetEvents(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -946,14 +908,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetLeadRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetLead(ctx, operations.GetLeadRequest{
         AccessToken: "rerum",
         AllFields: snyk.Bool(false),
         ID: "14cd66ae-395e-4fb9-ba88-f3a66997074b",
-    }
-
-    res, err := s.Snyk.GetLead(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -989,14 +949,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetLeadDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetLeadDetails(ctx, operations.GetLeadDetailsRequest{
         AccessToken: "id",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("labore"),
-    }
-
-    res, err := s.Snyk.GetLeadDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1033,14 +991,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetLeadsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetLeads(ctx, operations.GetLeadsRequest{
         AccessToken: "labore",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("suscipit"),
-    }
-
-    res, err := s.Snyk.GetLeads(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1074,14 +1030,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetNoteRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetNote(ctx, operations.GetNoteRequest{
         AccessToken: "natus",
         AllFields: snyk.Bool(false),
         ID: "b6e21419-5989-40af-a563-e2516fe4c8b7",
-    }
-
-    res, err := s.Snyk.GetNote(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1117,14 +1071,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetNoteDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetNoteDetails(ctx, operations.GetNoteDetailsRequest{
         AccessToken: "architecto",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("architecto"),
-    }
-
-    res, err := s.Snyk.GetNoteDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1158,14 +1110,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetNotesRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetNotes(ctx, operations.GetNotesRequest{
         AccessToken: "repudiandae",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("ullam"),
-    }
-
-    res, err := s.Snyk.GetNotes(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1199,14 +1149,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetTaskRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetTask(ctx, operations.GetTaskRequest{
         AccessToken: "expedita",
         AllFields: snyk.Bool(false),
         ID: "7fd2ed02-8921-4cdd-8692-601fb576b0d5",
-    }
-
-    res, err := s.Snyk.GetTask(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1242,14 +1190,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetTaskDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetTaskDetails(ctx, operations.GetTaskDetailsRequest{
         AccessToken: "voluptatibus",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("perferendis"),
-    }
-
-    res, err := s.Snyk.GetTaskDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1283,14 +1229,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetTasksRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetTasks(ctx, operations.GetTasksRequest{
         AccessToken: "fugiat",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("amet"),
-    }
-
-    res, err := s.Snyk.GetTasks(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1324,14 +1268,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetUserRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetUser(ctx, operations.GetUserRequest{
         AccessToken: "aut",
         AllFields: snyk.Bool(false),
         ID: "c5fbb258-7053-4202-873d-5fe9b90c2890",
-    }
-
-    res, err := s.Snyk.GetUser(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1367,14 +1309,12 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetUserDetailsRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetUserDetails(ctx, operations.GetUserDetailsRequest{
         AccessToken: "occaecati",
         AllFields: snyk.Bool(false),
         Cursor: snyk.String("rerum"),
-    }
-
-    res, err := s.Snyk.GetUserDetails(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1408,13 +1348,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.GetWebhookRequest{
+    ctx := context.Background()
+    res, err := s.Snyk.GetWebhook(ctx, operations.GetWebhookRequest{
         AccessToken: snyk.String("adipisci"),
         WebhookID: snyk.String("asperiores"),
-    }
-
-    res, err := s.Snyk.GetWebhook(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1483,8 +1421,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostAccountRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostAccount(ctx, operations.PostAccountRequestBody{
         AccessToken: "earum",
         Account: shared.AccountCreate{
             Additional: map[string]interface{}{
@@ -1506,9 +1444,7 @@ func main() {
             Phone: snyk.String("561.608.0764 x46568"),
             Website: snyk.String("distinctio"),
         },
-    }
-
-    res, err := s.Snyk.PostAccount(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1543,8 +1479,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostContactRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostContact(ctx, operations.PostContactRequestBody{
         AccessToken: "asperiores",
         Contact: shared.ContactCreate{
             Additional: map[string]interface{}{
@@ -1558,9 +1494,7 @@ func main() {
             MobilePhone: snyk.String("provident"),
             Phone: snyk.String("(856) 283-2478 x169"),
         },
-    }
-
-    res, err := s.Snyk.PostContact(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1598,8 +1532,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostCrmTaskRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostCrmTask(ctx, operations.PostCrmTaskRequestBody{
         AccessToken: "esse",
         Task: &shared.TaskCreate{
             AccountID: snyk.String("harum"),
@@ -1618,9 +1552,7 @@ func main() {
             Subject: snyk.String("nihil"),
             UserID: snyk.String("sit"),
         },
-    }
-
-    res, err := s.Snyk.PostCrmTask(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1655,8 +1587,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostDealRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostDeal(ctx, operations.PostDealRequestBody{
         AccessToken: "expedita",
         Deal: shared.DealCreate{
             AccountID: snyk.String("neque"),
@@ -1669,9 +1601,7 @@ func main() {
             Probability: snyk.String("maxime"),
             Stage: snyk.String("pariatur"),
         },
-    }
-
-    res, err := s.Snyk.PostDeal(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1706,8 +1636,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostEventRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostEvent(ctx, operations.PostEventRequestBody{
         AccessToken: "soluta",
         Event: &shared.EventCreate{
             AccountID: snyk.String("dicta"),
@@ -1728,9 +1658,7 @@ func main() {
             Subject: snyk.String("odio"),
             Type: snyk.String("sunt"),
         },
-    }
-
-    res, err := s.Snyk.PostEvent(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1799,8 +1727,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostLeadRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostLead(ctx, operations.PostLeadRequestBody{
         AccessToken: "ullam",
         Lead: shared.LeadCreate{
             Account: snyk.String("nam"),
@@ -1817,9 +1745,7 @@ func main() {
             MobilePhone: snyk.String("dolorum"),
             Phone: snyk.String("(205) 906-8792"),
         },
-    }
-
-    res, err := s.Snyk.PostLead(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1849,12 +1775,10 @@ import(
 func main() {
     s := snyk.New()
 
-    ctx := context.Background()    
-    req := operations.PostLinkExchangeRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostLinkExchange(ctx, operations.PostLinkExchangeRequestBody{
         PublicToken: "facilis",
-    }
-
-    res, err := s.Snyk.PostLinkExchange(ctx, req, operations.PostLinkExchangeSecurity{
+    }, operations.PostLinkExchangeSecurity{
         VesselAPIToken: "YOUR_API_KEY_HERE",
     })
     if err != nil {
@@ -1928,8 +1852,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostNoteRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostNote(ctx, operations.PostNoteRequestBody{
         AccessToken: "cupiditate",
         Note: shared.NoteCreate{
             AccountID: snyk.String("qui"),
@@ -1942,9 +1866,7 @@ func main() {
             LeadID: snyk.String("vero"),
             UserID: snyk.String("omnis"),
         },
-    }
-
-    res, err := s.Snyk.PostNote(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1979,15 +1901,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PostWebhookRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PostWebhook(ctx, operations.PostWebhookRequestBody{
         AccessToken: snyk.String("quis"),
         Webhook: &shared.WebhookMetadataCreate{
             WebhookURL: snyk.String("ipsum"),
         },
-    }
-
-    res, err := s.Snyk.PostWebhook(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2022,8 +1942,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutAccountRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutAccount(ctx, operations.PutAccountRequestBody{
         AccessToken: "delectus",
         Account: shared.AccountUpdate{
             Additional: map[string]interface{}{
@@ -2046,9 +1966,7 @@ func main() {
             Website: snyk.String("ex"),
         },
         ID: "d9f5fce6-c556-4146-83e2-50fb008c42e1",
-    }
-
-    res, err := s.Snyk.PutAccount(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2083,8 +2001,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutContactApplicationJSON{
+    ctx := context.Background()
+    res, err := s.Snyk.PutContactJSON(ctx, operations.PutContactApplicationJSON{
         AccessToken: "non",
         Contact: shared.ContactUpdate{
             Additional: map[string]interface{}{
@@ -2098,9 +2016,7 @@ func main() {
             Phone: snyk.String("415-243-4244 x564"),
         },
         ID: "bd466d28-c10a-4b3c-9ca4-251904e523c7",
-    }
-
-    res, err := s.Snyk.PutContactJSON(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2133,10 +2049,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := []byte("recusandae")
-
-    res, err := s.Snyk.PutContactRaw(ctx, req)
+    ctx := context.Background()
+    res, err := s.Snyk.PutContactRaw(ctx, []byte("recusandae"))
     if err != nil {
         log.Fatal(err)
     }
@@ -2171,8 +2085,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutDealRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutDeal(ctx, operations.PutDealRequestBody{
         AccessToken: "aperiam",
         Deal: shared.DealUpdate{
             AccountID: snyk.String("distinctio"),
@@ -2189,9 +2103,7 @@ func main() {
             Stage: snyk.String("praesentium"),
         },
         ID: "282aa482-562f-4222-a981-7ee17cbe61e6",
-    }
-
-    res, err := s.Snyk.PutDeal(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2226,8 +2138,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutEventRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutEvent(ctx, operations.PutEventRequestBody{
         AccessToken: "harum",
         Event: &shared.EventUpdate{
             Additional: map[string]interface{}{
@@ -2244,9 +2156,7 @@ func main() {
             Type: snyk.String("consequuntur"),
         },
         ID: "0c4f3789-fd87-41f9-9dd2-efd121aa6f1e",
-    }
-
-    res, err := s.Snyk.PutEvent(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2281,8 +2191,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutLeadRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutLead(ctx, operations.PutLeadRequestBody{
         AccessToken: snyk.String("vel"),
         Lead: &shared.LeadUpdate{
             Account: snyk.String("in"),
@@ -2297,9 +2207,7 @@ func main() {
             MobilePhone: snyk.String("quibusdam"),
             Phone: snyk.String("1-696-269-0804 x030"),
         },
-    }
-
-    res, err := s.Snyk.PutLead(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2334,8 +2242,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutNoteRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutNote(ctx, operations.PutNoteRequestBody{
         AccessToken: "consectetur",
         ID: "39d08086-a184-4039-8c26-071f93f5f064",
         Note: shared.NoteUpdate{
@@ -2345,9 +2253,7 @@ func main() {
             Content: snyk.String("maxime"),
             UserID: snyk.String("dignissimos"),
         },
-    }
-
-    res, err := s.Snyk.PutNote(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -2382,8 +2288,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()    
-    req := operations.PutTaskRequestBody{
+    ctx := context.Background()
+    res, err := s.Snyk.PutTask(ctx, operations.PutTaskRequestBody{
         AccessToken: "officia",
         ID: "f515cc41-3aa6-43aa-a8d6-7864dbb675fd",
         Task: &shared.TaskUpdate{
@@ -2399,9 +2305,7 @@ func main() {
             Subject: snyk.String("facere"),
             UserID: snyk.String("numquam"),
         },
-    }
-
-    res, err := s.Snyk.PutTask(ctx, req)
+    })
     if err != nil {
         log.Fatal(err)
     }
