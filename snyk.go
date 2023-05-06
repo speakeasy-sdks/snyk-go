@@ -101,8 +101,8 @@ func WithSecurity(security shared.Security) SDKOption {
 func New(opts ...SDKOption) *Snyk {
 	sdk := &Snyk{
 		_language:   "go",
-		_sdkVersion: "0.18.0",
-		_genVersion: "2.26.0",
+		_sdkVersion: "0.18.1",
+		_genVersion: "2.26.1",
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -2262,7 +2262,7 @@ func (s *Snyk) PostLinkExchange(ctx context.Context, request operations.PostLink
 // PostLinkToken - Create link token
 // Generates a link token to be used during the auhtentication flow. This token is passed to either the Vessel Link Component or `useVesselLink` hook.
 
-func (s *Snyk) PostLinkToken(ctx context.Context) (*operations.PostLinkTokenResponse, error) {
+func (s *Snyk) PostLinkToken(ctx context.Context, security operations.PostLinkTokenSecurity) (*operations.PostLinkTokenResponse, error) {
 	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/link/token"
 
@@ -2271,7 +2271,7 @@ func (s *Snyk) PostLinkToken(ctx context.Context) (*operations.PostLinkTokenResp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s._securityClient
+	client := utils.ConfigureSecurityClient(s._defaultClient, security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

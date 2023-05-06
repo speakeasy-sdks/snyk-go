@@ -1804,17 +1804,16 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/snyk-go"
+	"github.com/speakeasy-sdks/snyk-go/pkg/models/operations"
 )
 
 func main() {
-    s := snyk.New(
-        snyk.WithSecurity(shared.Security{
-            VesselAPIToken: "YOUR_API_KEY_HERE",
-        }),
-    )
+    s := snyk.New()
 
     ctx := context.Background()
-    res, err := s.Snyk.PostLinkToken(ctx)
+    res, err := s.Snyk.PostLinkToken(ctx, operations.PostLinkTokenSecurity{
+        VesselAPIToken: "YOUR_API_KEY_HERE",
+    })
     if err != nil {
         log.Fatal(err)
     }

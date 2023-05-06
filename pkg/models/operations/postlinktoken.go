@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+type PostLinkTokenSecurity struct {
+	VesselAPIToken string `security:"scheme,type=apiKey,subtype=header,name=vessel-api-token"`
+}
+
 // PostLinkToken200ApplicationJSON - Create link token
 type PostLinkToken200ApplicationJSON struct {
 	LinkToken *string `json:"linkToken,omitempty"`
