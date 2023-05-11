@@ -2,12 +2,12 @@ configVersion: 1.0.0
 management:
   docChecksum: 9487f0e927e9a64c040ad8b2283a361e
   docVersion: "1.0"
-  speakeasyVersion: 1.29.2
+  speakeasyVersion: 1.30.0
 generation:
   telemetryEnabled: false
   sdkClassName: snyk
   sdkFlattening: false
 go:
-  version: 0.18.2
+  version: 0.19.0
   maxMethodParams: 0
   packageName: github.com/speakeasy-sdks/snyk-go
