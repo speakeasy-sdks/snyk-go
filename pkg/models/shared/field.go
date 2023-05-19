@@ -82,34 +82,34 @@ type FieldOptions struct {
 	Name *FieldOptionsName `json:"name,omitempty"`
 }
 
-type FieldTypeEnum string
+type FieldType string
 
 const (
-	FieldTypeEnumString       FieldTypeEnum = "string"
-	FieldTypeEnumNumber       FieldTypeEnum = "number"
-	FieldTypeEnumDatetime     FieldTypeEnum = "datetime"
-	FieldTypeEnumDate         FieldTypeEnum = "date"
-	FieldTypeEnumBoolean      FieldTypeEnum = "boolean"
-	FieldTypeEnumReference    FieldTypeEnum = "reference"
-	FieldTypeEnumPhone        FieldTypeEnum = "phone"
-	FieldTypeEnumURL          FieldTypeEnum = "url"
-	FieldTypeEnumID           FieldTypeEnum = "id"
-	FieldTypeEnumEmail        FieldTypeEnum = "email"
-	FieldTypeEnumPercent      FieldTypeEnum = "percent"
-	FieldTypeEnumSingleselect FieldTypeEnum = "singleselect"
-	FieldTypeEnumMultiselect  FieldTypeEnum = "multiselect"
-	FieldTypeEnumAddress      FieldTypeEnum = "address"
-	FieldTypeEnumDaterange    FieldTypeEnum = "daterange"
-	FieldTypeEnumDecimal      FieldTypeEnum = "decimal"
-	FieldTypeEnumTime         FieldTypeEnum = "time"
-	FieldTypeEnumObject       FieldTypeEnum = "object"
+	FieldTypeString       FieldType = "string"
+	FieldTypeNumber       FieldType = "number"
+	FieldTypeDatetime     FieldType = "datetime"
+	FieldTypeDate         FieldType = "date"
+	FieldTypeBoolean      FieldType = "boolean"
+	FieldTypeReference    FieldType = "reference"
+	FieldTypePhone        FieldType = "phone"
+	FieldTypeURL          FieldType = "url"
+	FieldTypeID           FieldType = "id"
+	FieldTypeEmail        FieldType = "email"
+	FieldTypePercent      FieldType = "percent"
+	FieldTypeSingleselect FieldType = "singleselect"
+	FieldTypeMultiselect  FieldType = "multiselect"
+	FieldTypeAddress      FieldType = "address"
+	FieldTypeDaterange    FieldType = "daterange"
+	FieldTypeDecimal      FieldType = "decimal"
+	FieldTypeTime         FieldType = "time"
+	FieldTypeObject       FieldType = "object"
 )
 
-func (e FieldTypeEnum) ToPointer() *FieldTypeEnum {
+func (e FieldType) ToPointer() *FieldType {
 	return &e
 }
 
-func (e *FieldTypeEnum) UnmarshalJSON(data []byte) error {
+func (e *FieldType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -150,10 +150,10 @@ func (e *FieldTypeEnum) UnmarshalJSON(data []byte) error {
 	case "time":
 		fallthrough
 	case "object":
-		*e = FieldTypeEnum(v)
+		*e = FieldType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FieldTypeEnum: %v", v)
+		return fmt.Errorf("invalid value for FieldType: %v", v)
 	}
 }
 
@@ -171,7 +171,7 @@ type Field struct {
 	Name string `json:"name"`
 	// Possible options for this field
 	Options []FieldOptions `json:"options,omitempty"`
-	Type    FieldTypeEnum  `json:"type"`
+	Type    FieldType      `json:"type"`
 	// If this is a field we've unified across CRMs
 	Universal bool `json:"universal"`
 	// If this field can be updated

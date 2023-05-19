@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-type CrmIntegrationIntegrationIDEnum string
+type CrmIntegrationIntegrationID string
 
 const (
-	CrmIntegrationIntegrationIDEnumSalesforce CrmIntegrationIntegrationIDEnum = "salesforce"
-	CrmIntegrationIntegrationIDEnumHubspot    CrmIntegrationIntegrationIDEnum = "hubspot"
-	CrmIntegrationIntegrationIDEnumPipedrive  CrmIntegrationIntegrationIDEnum = "pipedrive"
+	CrmIntegrationIntegrationIDSalesforce CrmIntegrationIntegrationID = "salesforce"
+	CrmIntegrationIntegrationIDHubspot    CrmIntegrationIntegrationID = "hubspot"
+	CrmIntegrationIntegrationIDPipedrive  CrmIntegrationIntegrationID = "pipedrive"
 )
 
-func (e CrmIntegrationIntegrationIDEnum) ToPointer() *CrmIntegrationIntegrationIDEnum {
+func (e CrmIntegrationIntegrationID) ToPointer() *CrmIntegrationIntegrationID {
 	return &e
 }
 
-func (e *CrmIntegrationIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+func (e *CrmIntegrationIntegrationID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,16 +30,16 @@ func (e *CrmIntegrationIntegrationIDEnum) UnmarshalJSON(data []byte) error {
 	case "hubspot":
 		fallthrough
 	case "pipedrive":
-		*e = CrmIntegrationIntegrationIDEnum(v)
+		*e = CrmIntegrationIntegrationID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CrmIntegrationIntegrationIDEnum: %v", v)
+		return fmt.Errorf("invalid value for CrmIntegrationIntegrationID: %v", v)
 	}
 }
 
 type CrmIntegration struct {
 	// Base 64 data URI
-	IconURL       *string                          `json:"iconURL,omitempty"`
-	IntegrationID *CrmIntegrationIntegrationIDEnum `json:"integrationId,omitempty"`
-	Name          *string                          `json:"name,omitempty"`
+	IconURL       *string                      `json:"iconURL,omitempty"`
+	IntegrationID *CrmIntegrationIntegrationID `json:"integrationId,omitempty"`
+	Name          *string                      `json:"name,omitempty"`
 }

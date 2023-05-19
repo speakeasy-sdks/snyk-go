@@ -16,19 +16,19 @@ type PostLinkExchangeRequestBody struct {
 	PublicToken string `json:"publicToken"`
 }
 
-type PostLinkExchange200ApplicationJSONIntegrationIDEnum string
+type PostLinkExchange200ApplicationJSONIntegrationID string
 
 const (
-	PostLinkExchange200ApplicationJSONIntegrationIDEnumSalesforce PostLinkExchange200ApplicationJSONIntegrationIDEnum = "salesforce"
-	PostLinkExchange200ApplicationJSONIntegrationIDEnumHubspot    PostLinkExchange200ApplicationJSONIntegrationIDEnum = "hubspot"
-	PostLinkExchange200ApplicationJSONIntegrationIDEnumPipedrive  PostLinkExchange200ApplicationJSONIntegrationIDEnum = "pipedrive"
+	PostLinkExchange200ApplicationJSONIntegrationIDSalesforce PostLinkExchange200ApplicationJSONIntegrationID = "salesforce"
+	PostLinkExchange200ApplicationJSONIntegrationIDHubspot    PostLinkExchange200ApplicationJSONIntegrationID = "hubspot"
+	PostLinkExchange200ApplicationJSONIntegrationIDPipedrive  PostLinkExchange200ApplicationJSONIntegrationID = "pipedrive"
 )
 
-func (e PostLinkExchange200ApplicationJSONIntegrationIDEnum) ToPointer() *PostLinkExchange200ApplicationJSONIntegrationIDEnum {
+func (e PostLinkExchange200ApplicationJSONIntegrationID) ToPointer() *PostLinkExchange200ApplicationJSONIntegrationID {
 	return &e
 }
 
-func (e *PostLinkExchange200ApplicationJSONIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+func (e *PostLinkExchange200ApplicationJSONIntegrationID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -39,20 +39,20 @@ func (e *PostLinkExchange200ApplicationJSONIntegrationIDEnum) UnmarshalJSON(data
 	case "hubspot":
 		fallthrough
 	case "pipedrive":
-		*e = PostLinkExchange200ApplicationJSONIntegrationIDEnum(v)
+		*e = PostLinkExchange200ApplicationJSONIntegrationID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PostLinkExchange200ApplicationJSONIntegrationIDEnum: %v", v)
+		return fmt.Errorf("invalid value for PostLinkExchange200ApplicationJSONIntegrationID: %v", v)
 	}
 }
 
 // PostLinkExchange200ApplicationJSON - Exchange for access token
 type PostLinkExchange200ApplicationJSON struct {
-	AccessToken   string                                              `json:"accessToken"`
-	ConnectionID  string                                              `json:"connectionId"`
-	IntegrationID PostLinkExchange200ApplicationJSONIntegrationIDEnum `json:"integrationId"`
-	NativeOrgID   string                                              `json:"nativeOrgId"`
-	NativeOrgURL  string                                              `json:"nativeOrgURL"`
+	AccessToken   string                                          `json:"accessToken"`
+	ConnectionID  string                                          `json:"connectionId"`
+	IntegrationID PostLinkExchange200ApplicationJSONIntegrationID `json:"integrationId"`
+	NativeOrgID   string                                          `json:"nativeOrgId"`
+	NativeOrgURL  string                                          `json:"nativeOrgURL"`
 }
 
 type PostLinkExchangeResponse struct {

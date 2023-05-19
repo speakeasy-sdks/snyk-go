@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-type ConnectionIntegrationIDEnum string
+type ConnectionIntegrationID string
 
 const (
-	ConnectionIntegrationIDEnumSalesforce ConnectionIntegrationIDEnum = "salesforce"
-	ConnectionIntegrationIDEnumHubspot    ConnectionIntegrationIDEnum = "hubspot"
-	ConnectionIntegrationIDEnumPipedrive  ConnectionIntegrationIDEnum = "pipedrive"
+	ConnectionIntegrationIDSalesforce ConnectionIntegrationID = "salesforce"
+	ConnectionIntegrationIDHubspot    ConnectionIntegrationID = "hubspot"
+	ConnectionIntegrationIDPipedrive  ConnectionIntegrationID = "pipedrive"
 )
 
-func (e ConnectionIntegrationIDEnum) ToPointer() *ConnectionIntegrationIDEnum {
+func (e ConnectionIntegrationID) ToPointer() *ConnectionIntegrationID {
 	return &e
 }
 
-func (e *ConnectionIntegrationIDEnum) UnmarshalJSON(data []byte) error {
+func (e *ConnectionIntegrationID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -30,26 +30,26 @@ func (e *ConnectionIntegrationIDEnum) UnmarshalJSON(data []byte) error {
 	case "hubspot":
 		fallthrough
 	case "pipedrive":
-		*e = ConnectionIntegrationIDEnum(v)
+		*e = ConnectionIntegrationID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ConnectionIntegrationIDEnum: %v", v)
+		return fmt.Errorf("invalid value for ConnectionIntegrationID: %v", v)
 	}
 }
 
-type ConnectionStatusEnum string
+type ConnectionStatus string
 
 const (
-	ConnectionStatusEnumNewConnection ConnectionStatusEnum = "NEW_CONNECTION"
-	ConnectionStatusEnumInitialSync   ConnectionStatusEnum = "INITIAL_SYNC"
-	ConnectionStatusEnumReady         ConnectionStatusEnum = "READY"
+	ConnectionStatusNewConnection ConnectionStatus = "NEW_CONNECTION"
+	ConnectionStatusInitialSync   ConnectionStatus = "INITIAL_SYNC"
+	ConnectionStatusReady         ConnectionStatus = "READY"
 )
 
-func (e ConnectionStatusEnum) ToPointer() *ConnectionStatusEnum {
+func (e ConnectionStatus) ToPointer() *ConnectionStatus {
 	return &e
 }
 
-func (e *ConnectionStatusEnum) UnmarshalJSON(data []byte) error {
+func (e *ConnectionStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -60,17 +60,17 @@ func (e *ConnectionStatusEnum) UnmarshalJSON(data []byte) error {
 	case "INITIAL_SYNC":
 		fallthrough
 	case "READY":
-		*e = ConnectionStatusEnum(v)
+		*e = ConnectionStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ConnectionStatusEnum: %v", v)
+		return fmt.Errorf("invalid value for ConnectionStatus: %v", v)
 	}
 }
 
 type Connection struct {
-	ConnectionID  *string                      `json:"connectionId,omitempty"`
-	CreatedTime   *string                      `json:"createdTime,omitempty"`
-	IntegrationID *ConnectionIntegrationIDEnum `json:"integrationId,omitempty"`
-	NativeOrgURL  *string                      `json:"nativeOrgURL,omitempty"`
-	Status        *ConnectionStatusEnum        `json:"status,omitempty"`
+	ConnectionID  *string                  `json:"connectionId,omitempty"`
+	CreatedTime   *string                  `json:"createdTime,omitempty"`
+	IntegrationID *ConnectionIntegrationID `json:"integrationId,omitempty"`
+	NativeOrgURL  *string                  `json:"nativeOrgURL,omitempty"`
+	Status        *ConnectionStatus        `json:"status,omitempty"`
 }
